@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
             finishLine.transform.rotation = gridList[gridList.Length - 1].transform.rotation;
         }
         //GameOverObj.gameObject.transform.parent.gameObject.SetActive(false);
-        GameAnalyticsSDK.GameAnalytics.Initialize();
+        //GameAnalyticsSDK.GameAnalytics.Initialize();
 
     }
 
