@@ -34,9 +34,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _gameSeconds = 0;
     public int RealCoins = 0;
     public int CoinGeneral;
+    private bool _isLevelBegin = false;
+
     public PlayerControllerWaypoint playerControllerWP;
     public FakePlayerController rivalController;
-    private bool _isLevelBegin = false;
     private float tempSpeedPlayer;
     private float tempSpeedRival;
     private Vector3 _playerPosStart;
@@ -252,6 +253,8 @@ public class GameManager : MonoBehaviour
     {
         //Time.timeScale = 0;
         playerControllerWP.PlayerSpeed = 0;
+        _player.GetComponent<SphereCollider>().enabled = false;
+        
         rivalController.speed = 0;
         if (playerName == "Player")
         {
@@ -273,9 +276,11 @@ public class GameManager : MonoBehaviour
         CoinText.text = CoinGeneral.ToString();
         ScoreText.text = score.ToString();
         PlayerPrefs.SetInt("Coin",CoinGeneral);
+
+        _player.GetComponentInChildren<PlayerImageController>().ChangeAnimator();
         //CoinText.gameObject.transform.parent.gameObject.SetActive(true);
         InGameImage.SetActive(false);
-        GameOverObj.SetActive(true);
+        StartCoroutine("GameOverUiDelay");
         
         audioSource.Stop();
     }
@@ -349,5 +354,11 @@ public class GameManager : MonoBehaviour
         {
             return Levels[currLevelId + 1];
         }
+    }
+
+    IEnumerator GameOverUiDelay()
+    {
+        yield return new WaitForSeconds(3);
+        GameOverObj.SetActive(true);
     }
 }
