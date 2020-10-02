@@ -25,13 +25,13 @@ public class FakePlayerController : MonoBehaviour
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
         float mouseX = Input.mousePosition.x;
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (mouseX < Screen.width / 2)
-                Gcontrol.TurnLeft();
-            else if (mouseX > Screen.width / 2)
-                Gcontrol.TurnRight();
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (mouseX < Screen.width / 2)
+        //        Gcontrol.TurnLeft();
+        //    else if (mouseX > Screen.width / 2)
+        //        Gcontrol.TurnRight();
+        //}
     }
 
     private void OnTriggerEnter(Collider other)

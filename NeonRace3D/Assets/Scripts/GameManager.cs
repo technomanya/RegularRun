@@ -36,12 +36,15 @@ public class GameManager : MonoBehaviour
     public int CoinGeneral;
     private bool _isLevelBegin = false;
 
+    [Header("Player Attributes")]
     public PlayerControllerWaypoint playerControllerWP;
     public FakePlayerController rivalController;
     private float tempSpeedPlayer;
     private float tempSpeedRival;
     private Vector3 _playerPosStart;
     private Vector3 _fakePlayerPosStart;
+    private Quaternion _playerRotStart;
+    private Quaternion _fakePlayerRotStart;
     private GameObject _player;
     private GameObject _fakePlayer;
 
@@ -227,9 +230,11 @@ public class GameManager : MonoBehaviour
         playerControllerWP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControllerWaypoint>();
         rivalController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<FakePlayerController>();
         _player = GameObject.FindGameObjectWithTag("Player");
-        _fakePlayer = GameObject.FindWithTag("Enemy");
+        _fakePlayer = GameObject.FindGameObjectWithTag("Enemy");
         _playerPosStart = _player.transform.position;
+        _playerRotStart = _player.transform.rotation;
         _fakePlayerPosStart = _fakePlayer.transform.position;
+        _fakePlayerRotStart = _fakePlayer.transform.rotation;
     }
 
     void Update()
@@ -260,6 +265,7 @@ public class GameManager : MonoBehaviour
         {
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
+            _player.GetComponentInChildren<PlayerImageController>().ChangeAnimator(false);
         }
         else
         {
@@ -277,7 +283,7 @@ public class GameManager : MonoBehaviour
         ScoreText.text = score.ToString();
         PlayerPrefs.SetInt("Coin",CoinGeneral);
 
-        _player.GetComponentInChildren<PlayerImageController>().ChangeAnimator();
+        _player.GetComponentInChildren<PlayerImageController>().ChangeAnimator(false);
         //CoinText.gameObject.transform.parent.gameObject.SetActive(true);
         InGameImage.SetActive(false);
         StartCoroutine("GameOverUiDelay");
@@ -289,6 +295,8 @@ public class GameManager : MonoBehaviour
     {
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index);
+
+        Start();
         Time.timeScale = 1;
         audioSource.Play();
         if(_isLevelBegin == true)
@@ -297,20 +305,37 @@ public class GameManager : MonoBehaviour
 
     public void Begin()
     {
-        Time.timeScale = 1;
+        
         //PointAddByType(PointSystem.Seconds, (int)Time.realtimeSinceStartup);
         Gcontroller._canTurn = true;
         audioSource.Play();
         _isLevelBegin = true;
         InGameImage.SetActive(true);
+        GameOverObj.SetActive(false);
+        _player.transform.position = _playerPosStart;
+        _player.transform.rotation = _playerRotStart;
+        _fakePlayer.transform.position = _fakePlayerPosStart;
+        _fakePlayer.transform.rotation = _fakePlayerRotStart;
+        //_player.GetComponentInChildren<PlayerImageController>().ChangeAnimator(true);
         tempSpeedPlayer = playerControllerWP.PlayerSpeed;
         tempSpeedRival = rivalController.speed;
         CurrenLevel.GetLevelRoad().SetActive(true);
+        gridList = GameObject.FindGameObjectsWithTag("Grid");
+        Gcontroller.GridControllerBegin();
+        playerControllerWP.PlayerControlBegin();
+        Time.timeScale = 1;
     }
 
     public void NewLevel()
     {
-        ChangeLevel(CurrenLevel.GetLevelId());
+        foreach (var wayPoint in playerControllerWP._wayPoints)
+        {
+            wayPoint.transform.SetParent(CurrenLevel.GetLevelRoad().transform);
+        }
+        
+        CurrenLevel.GetLevelRoad().SetActive(false);
+        CurrenLevel = ChangeLevel(CurrenLevel.GetLevelId());
+        Begin();
 
     }
     public void PauseContinue(bool state)

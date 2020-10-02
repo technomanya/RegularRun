@@ -39,17 +39,17 @@ public class FakePlayerImageController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Collide");
-        if (other.transform.parent.CompareTag("Obstacle") && speed > 5.0f)
+        if (other.transform.parent.CompareTag("Obstacle") && speed > 10.0f)
         {
             //Destroy(other.gameObject);
             speed -= speed * 0.2f;
             PlayerController.speed = speed;
             //gameObject.GetComponent<GridController>().speed -= gameObject.GetComponent<GridController>().speed * 0.2f;
         }
-        else if (other.transform.parent.CompareTag("Power") && speed < 20.0f)
+        else if (other.transform.parent.CompareTag("Power") && speed < 30.0f)
         {
             //Destroy(other.gameObject);
-            speed += speed * 0.5f;
+            speed += speed;
             PlayerController.speed = speed;
             //gameObject.GetComponent<GridController>().speed *= 2;
 

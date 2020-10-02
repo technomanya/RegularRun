@@ -70,7 +70,7 @@ public class GridController : MonoBehaviour
     {
         if (_canTurn)
         {
-            tronRunning.GetComponent<Animation>().GetClip("Running@Running Left Turn");
+            //tronRunning.GetComponent<Animation>().GetClip("Running@Running Left Turn");
             //tronRunning.SetTrigger("RightTurnSingle");
             _canTurn = false;
             StartCoroutine(Rotate(gameObject, Vector3.forward, -90, rotDuration));
@@ -127,5 +127,11 @@ public class GridController : MonoBehaviour
     void DestroyGrid()
     {
         Destroy(oldGrid);
+    }
+
+    public void GridControllerBegin()
+    {
+        //Grid = null;
+        Grid = GM.gridList[0];
     }
 }

@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Analytics;
 using Random = UnityEngine.Random;
 
 //using Random = System.Random;
@@ -22,8 +22,8 @@ public class PlayerImageController : MonoBehaviour
     private float endCounterSec;
     private bool _isGameOver = false;
     private AudioSource[] audios;
-    [SerializeField] private AnimatorController dances;
-    [SerializeField] private AnimatorController inGame;
+    //[SerializeField] private AnimatorController dances;
+    //[SerializeField] private AnimatorController inGame;
 
     public PlayerController PlayerController;
     public PlayerControllerWaypoint PlayerControllerWP;
@@ -245,12 +245,21 @@ public class PlayerImageController : MonoBehaviour
         movingHandle.localPosition = finalPosition;
     }
 
-    public void ChangeAnimator()
+    public void ChangeAnimator(bool inGame)
     {
         int rand = 0;
-        rand = Random.Range(1, 2);
         var anim = GameObject.FindGameObjectWithTag("Animator").GetComponent<Animator>();
-        transform.Rotate(Vector3.up, 180);
-        anim.SetInteger("DanceMode", rand);
+        
+
+        if (inGame)
+        {
+            anim.SetInteger("DanceMode", rand);
+        }
+        else
+        {
+            rand = Random.Range(1, 2);
+            transform.Rotate(Vector3.up, 180);
+            anim.SetInteger("DanceMode", rand);
+        }
     }
 }

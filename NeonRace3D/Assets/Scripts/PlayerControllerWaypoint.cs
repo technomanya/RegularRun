@@ -109,4 +109,19 @@ public class PlayerControllerWaypoint : MonoBehaviour
             InputT = InputType.Hold;
 
     }
+
+    public void PlayerControlBegin()
+    {
+        if (_wayPoints.Length > 0)
+        {
+            _wayPoints = null;
+        }
+        _wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+        foreach (var wp in _wayPoints)
+        {
+            wp.transform.SetParent(null);
+        }
+
+        _wayPoints.OrderBy(_wayPoints => _wayPoints.transform.position.z);
+    }
 }
