@@ -72,7 +72,7 @@ Material:
     - _OcclusionStrength: 1
     - _Offset1: 0
     - _Offset2: 0
-    - _Outline: 1
+    - _Outline: 0.26
     - _Parallax: 0.02
     - _RampSmooth: 0.01
     - _RampSmoothAdd: 0.75
@@ -80,7 +80,7 @@ Material:
     - _RimMax: 0.85
     - _RimMin: 0.6
     - _RimStrength: 0.5
-    - _Shininess: 0.03
+    - _Shininess: 0.156
     - _SmoothnessTextureChannel: 0
     - _SpecBlend: 1
     - _SpecSmooth: 1
