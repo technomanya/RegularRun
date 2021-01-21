@@ -254,17 +254,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver(string playerName, Animator[] animS = null)
+    public void GameOver(string playerName)
     {
         //Time.timeScale = 0;
         playerControllerWP.PlayerSpeed = 0;
         _player.GetComponent<SphereCollider>().enabled = false;
         
         rivalController.speed = 0;
-        if (animS == null)
-        {
-            animS = _player.GetComponent<PlayerImageController>().animPlayer;
-        }
+
+        var animS = _player.GetComponent<PlayerImageController>().animPlayer;
         if (playerName == "Player")
         {
             youLose.gameObject.SetActive(false);
