@@ -84,11 +84,11 @@ Material:
     - _Parallax: 0.02
     - _RampSmooth: 0.689
     - _RampSmoothAdd: 1
-    - _RampThreshold: 0.783
+    - _RampThreshold: 0.988
     - _RimMax: 0.85
-    - _RimMin: 0.6
+    - _RimMin: 0.397
     - _RimStrength: 0.5
-    - _Smoothness: 0.293
+    - _Smoothness: 0.273
     - _SmoothnessTextureChannel: 0
     - _SpecBlend: 1
     - _SpecSmooth: 1
@@ -108,9 +108,9 @@ Material:
     m_Colors:
     - _Color: {r: 0.9716981, g: 0.8749667, b: 0.050418302, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 1, g: 1, b: 0.21226418, a: 1}
+    - _HColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
     - _OutlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+    - _RimColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0.6}
+    - _SColor: {r: 0.9433962, g: 0.15574935, b: 0.24290816, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

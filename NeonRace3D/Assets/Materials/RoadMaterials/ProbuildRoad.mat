@@ -90,8 +90,8 @@ Material:
     - _Offset2: 0
     - _Outline: 1
     - _Parallax: 0.02
-    - _RampSmooth: 0.26
-    - _RampThreshold: 0.938
+    - _RampSmooth: 1
+    - _RampThreshold: 1
     - _Shininess: 0.01
     - _SmoothnessTextureChannel: 0
     - _SpecSmooth: 0.05
@@ -102,7 +102,7 @@ Material:
     - _ZSmooth: -0.5
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8632076, g: 0.9746269, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
