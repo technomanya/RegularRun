@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _fakePlayerPosStart;
     private Quaternion _playerRotStart;
     private Quaternion _fakePlayerRotStart;
-    private GameObject _player;
+    public GameObject _player;
     private GameObject _fakePlayer;
 
     [Space(10)]
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
             CurrenLevel = Levels[0];
         }
 
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "GameScene 2")
         {
             foreach (var gridPref in LevelRoad)
             {
@@ -254,23 +254,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver(string playerName)
+    public void GameOver(string playerName, Animator[] animS = null)
     {
         //Time.timeScale = 0;
         playerControllerWP.PlayerSpeed = 0;
         _player.GetComponent<SphereCollider>().enabled = false;
         
         rivalController.speed = 0;
+        if (animS == null)
+        {
+            animS = _player.GetComponent<PlayerImageController>().animPlayer;
+        }
         if (playerName == "Player")
         {
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
-            _player.GetComponentInChildren<PlayerImageController>().ChangeAnimator(false);
+
+            
+            foreach (var anim in animS)
+            {
+                anim.SetInteger("DanceMode", 1);
+            }
         }
         else
         {
             youWin.gameObject.SetActive(false);
             youLose.gameObject.SetActive(true);
+            foreach (var anim in animS)
+            {
+                anim.SetBool("GameOver", true);
+            }
         }
         PointAddByType(PointSystem.Seconds, (int)Time.realtimeSinceStartup);
         var coin = Mathf.Clamp((int)(_positivePoint - _negativePoint), 0, Mathf.Infinity);
@@ -283,7 +296,7 @@ public class GameManager : MonoBehaviour
         ScoreText.text = score.ToString();
         PlayerPrefs.SetInt("Coin",CoinGeneral);
 
-        _player.GetComponentInChildren<PlayerImageController>().ChangeAnimator(false);
+        
         //CoinText.gameObject.transform.parent.gameObject.SetActive(true);
         InGameImage.SetActive(false);
         StartCoroutine("GameOverUiDelay");

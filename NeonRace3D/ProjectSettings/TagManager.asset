@@ -25,6 +25,9 @@ TagManager:
   - CoinPivot
   - Road
   - Jet
+  - ShieldStack
+  - FinalStack
+  - BodyPart
   layers:
   - Default
   - TransparentFX

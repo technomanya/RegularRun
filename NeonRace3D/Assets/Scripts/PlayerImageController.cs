@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Analytics;
-using Random = UnityEngine.Random;
-
-//using Random = System.Random;
 
 public class PlayerImageController : MonoBehaviour
 {
@@ -22,8 +18,6 @@ public class PlayerImageController : MonoBehaviour
     private float endCounterSec;
     private bool _isGameOver = false;
     private AudioSource[] audios;
-    //[SerializeField] private AnimatorController dances;
-    //[SerializeField] private AnimatorController inGame;
 
     public PlayerController PlayerController;
     public PlayerControllerWaypoint PlayerControllerWP;
@@ -33,11 +27,24 @@ public class PlayerImageController : MonoBehaviour
     public Camera MainCamera;
     public GameObject[] SpeedBars;
     public GameObject JetObj;
+    public List<GameObject> ShieldStack = new List<GameObject>();
+    public List<GameObject> ShieldStackDisable = new List<GameObject>();
+    public GameObject ShieldStackPrefab;
+    public GameObject ShieldStackParent;
+    public GameObject ShieldMain;
+    public int stackCount;
+    public Animator[] animPlayer;
 
     void Start()
     {
-        JetObj = GameObject.FindGameObjectWithTag("Jet");
-        JetObj.SetActive(false);
+        animPlayer = GetComponentsInChildren<Animator>();
+        for (int i = 0; i < stackCount; i++)
+        {
+            MakeStack(true);
+        }
+        
+        //JetObj = GameObject.FindGameObjectWithTag("Jet");
+        //JetObj.SetActive(false);
         PlayerController = GetComponentInParent<PlayerController>();
         GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (gameObject.GetComponentInParent<PlayerControllerWaypoint>())
@@ -98,7 +105,7 @@ public class PlayerImageController : MonoBehaviour
 
         if (sprintBegin > 0)
         {
-            JetObj.SetActive(true);
+            //JetObj.SetActive(true);
             //gameObject.transform.localPosition = new Vector3(0,3.0f,0);
             //gameObject.transform.localEulerAngles = new Vector3(60, 0, 0);
             cameraMove = 1;
@@ -112,7 +119,7 @@ public class PlayerImageController : MonoBehaviour
                 //gameObject.transform.localEulerAngles = Vector3.zero;
                 foreach (var bar in SpeedBars)
                 {
-                    JetObj.SetActive(false);
+                    //JetObj.SetActive(false);
                     
                     
                     cameraMove = 2;
@@ -157,63 +164,81 @@ public class PlayerImageController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent.CompareTag("Obstacle"))
-        {
-            
-            if(sprintBegin == 0 && slowBegin == 0)
-            {
-                //Debug.Log("ObstacleHit");
-                slowBegin = Time.timeSinceLevelLoad;
-                //PlayerControllerWP.PlayerSpeed = minSpeed;
-                //if (speed >= minSpeed)
-                //{
-                //    speed -= speed * 0.3f;
-                //    PlayerControllerWP.PlayerSpeed = minSpeed;
-                //}
-                //Destroy(other.gameObject);
-                other.gameObject.GetComponent<Renderer>().enabled = false;
-                obstacleFX.Play();
-                audios[0].Play();
-                gridCon.tronRunning.SetTrigger("Stumble");
-            }
+        //if (other.transform.parent.CompareTag("Obstacle") )
+        //{
 
-            GM.PointAddByType(GameManager.PointSystem.NegativePoint, 5);
-            //gameObject.GetComponent<GridController>().speed -= gameObject.GetComponent<GridController>().speed * 0.2f;
-        }
-        else if (other.transform.parent.CompareTag("Power"))
-        {
-            //Debug.Log("PowerHit");
-            if(sprintBegin == 0 )
-            {
-                if (powerCounter < 4)
-                {
-                    powerCounter++;
-                }
-                else
-                {
-                    powerCounter = 0;
-                }
+        //    if(sprintBegin == 0 && slowBegin == 0)
+        //    {
+        //        //Debug.Log("ObstacleHit");
+        //        slowBegin = Time.timeSinceLevelLoad;
+        //        //PlayerControllerWP.PlayerSpeed = minSpeed;
+        //        //if (speed >= minSpeed)
+        //        //{
+        //        //    speed -= speed * 0.3f;
+        //        //    PlayerControllerWP.PlayerSpeed = minSpeed;
+        //        //}
+        //        //Destroy(other.gameObject);
+        //        other.gameObject.GetComponent<Renderer>().enabled = false;
+        //        obstacleFX.Play();
+        //        audios[0].Play();
+        //        gridCon.tronRunning.SetTrigger("Stumble");
+        //    }
 
-                //if (speed <= maxSpeed)
-                //{
-                //    speed += speed;
-                //    PlayerControllerWP.PlayerSpeed = speed;
-                //}
-                //Destroy(other.gameObject);
-                other.gameObject.GetComponent<Renderer>().enabled = false;
-                powerFX.Play();
-                audios[1].Play();
-                gridCon.tronRunning.SetTrigger("Sprint");
-            }
+        //    GM.PointAddByType(GameManager.PointSystem.NegativePoint, 5);
+        //    //gameObject.GetComponent<GridController>().speed -= gameObject.GetComponent<GridController>().speed * 0.2f;
+        //}
+        //else if (other.transform.parent.CompareTag("Power"))
+        //{
+        //    //Debug.Log("PowerHit");
+        //    if(sprintBegin == 0 )
+        //    {
+        //        if (powerCounter < 4)
+        //        {
+        //            powerCounter++;
+        //        }
+        //        else
+        //        {
+        //            powerCounter = 0;
+        //        }
 
-            GM.PointAddByType(GameManager.PointSystem.PositivePoint, 10);
-            //gameObject.GetComponent<GridController>().speed *= 2;
-        }
-        else if (other.transform.CompareTag("CoinObj"))
+        //        //if (speed <= maxSpeed)
+        //        //{
+        //        //    speed += speed;
+        //        //    PlayerControllerWP.PlayerSpeed = speed;
+        //        //}
+        //        //Destroy(other.gameObject);
+        //        other.gameObject.GetComponent<Renderer>().enabled = false;
+        //        powerFX.Play();
+        //        audios[1].Play();
+        //        gridCon.tronRunning.SetTrigger("Sprint");
+        //    }
+
+        //    GM.PointAddByType(GameManager.PointSystem.PositivePoint, 10);
+        //    //gameObject.GetComponent<GridController>().speed *= 2;
+        //}
+
+        //if (other.transform.CompareTag("CoinObj"))
+        //{
+        //    GM.RealCoins++;
+        //    other.GetComponent<Renderer>().enabled = false;
+        //}
+        if (other.transform.CompareTag("PowerObj"))
         {
-            GM.RealCoins++;
-            other.GetComponent<Renderer>().enabled = false;
+            audios[1].Play();
+            ChangeStack(true);
+            other.gameObject.SetActive(false);
         }
+        else if (other.transform.CompareTag("ObstacleObj"))
+        {
+            audios[0].Play();
+            ChangeStack(false);
+        }
+
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        
     }
 
     void CameraEffect(Vector3 startPos, Vector3 endPos)
@@ -245,21 +270,87 @@ public class PlayerImageController : MonoBehaviour
         movingHandle.localPosition = finalPosition;
     }
 
-    public void ChangeAnimator(bool inGame)
+    void MakeStack(bool cond)
     {
-        int rand = 0;
-        var anim = GameObject.FindGameObjectWithTag("Animator").GetComponent<Animator>();
-        
-
-        if (inGame)
+        ShieldMain.SetActive(true);
+        if (cond)
         {
-            anim.SetInteger("DanceMode", rand);
+            var shieldInstance = Instantiate(ShieldStackPrefab, new Vector3(0.25f,1.7f,0f), Quaternion.identity);
+            shieldInstance.transform.parent = ShieldStackParent.transform;
+            shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+            shieldInstance.transform.localEulerAngles = new Vector3(90,0,0);
+            if(ShieldStack.Count > 0)
+            {
+                shieldInstance.transform.position = ShieldStack[ShieldStack.Count-1].transform.position;
+                shieldInstance.transform.Translate(Vector3.down * 0.5f);
+                
+            }
+
+            ShieldStack.Add(shieldInstance);
         }
         else
         {
-            rand = Random.Range(1, 2);
-            transform.Rotate(Vector3.up, 180);
-            anim.SetInteger("DanceMode", rand);
+            if (ShieldStack.Count > 0)
+            {
+                ShieldStack.RemoveAt(ShieldStack.Count-1);
+            }
+            else
+            {
+                GM.GameOver("LOSE", animPlayer);
+            }
+        }
+    }
+
+    void ChangeStack(bool cond)
+    {
+        if(ShieldStack.Count == 0)
+            ShieldMain.SetActive(false);
+
+        if (cond)
+        {
+
+            if (ShieldStack.Count > 0)
+            {
+                
+                var shieldCount = GameObject.FindGameObjectsWithTag("ShieldStack").Length;
+                if (shieldCount >= ShieldStack.Count)
+                {
+                    
+                    var shieldInstance = Instantiate(ShieldStackPrefab, new Vector3(0.25f, 1.7f, 0f), Quaternion.identity);
+                    shieldInstance.transform.parent = ShieldStackParent.transform;
+                    shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+                    shieldInstance.transform.localEulerAngles = new Vector3(90,0,0) ;
+
+                    shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 1].transform.position;
+                    shieldInstance.transform.Translate(Vector3.down * 1f);
+
+                    ShieldStack.Add(shieldInstance);
+                }
+                else if(shieldCount < ShieldStack.Count)
+                {
+                    var shieldTemp = ShieldStackDisable[0];
+                    ShieldStackDisable.Remove(shieldTemp);
+                    ShieldStack.Add(shieldTemp);
+                    ShieldStack[shieldCount].SetActive(true);
+                }
+               
+            }
+        }
+        else
+        {
+            if (ShieldStack.Count > 0)
+            {
+                var shieldTemp = ShieldStack[ShieldStack.Count - 1];
+                shieldTemp.SetActive(false);
+                ShieldStack.Remove(shieldTemp);
+                ShieldStackDisable.Add(shieldTemp);
+
+            }
+            else
+            {
+                animPlayer = GetComponentsInChildren<Animator>();
+                GM.GameOver("LOSE", animPlayer);
+            }
         }
     }
 }
