@@ -37,10 +37,10 @@ public class GlassBreakBehaviour : MonoBehaviour
             foreach (var part in glassParts)
             {
                 part.transform.parent = null;
-                part.SetActive(true);
+                part.GetComponent<Rigidbody>().isKinematic = false;
             }
 
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            //gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 

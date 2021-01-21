@@ -224,6 +224,7 @@ public class PlayerImageController : MonoBehaviour
         //}
         if (other.transform.CompareTag("PowerObj"))
         {
+            powerFX.Play();
             audios[1].Play();
             ChangeStack(true);
             other.gameObject.SetActive(false);
@@ -238,7 +239,19 @@ public class PlayerImageController : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        
+        if (col.transform.CompareTag("PowerObj"))
+        {
+            powerFX.Play();
+            audios[1].Play();
+            ChangeStack(true);
+            col.gameObject.SetActive(false);
+        }
+        else if (col.transform.CompareTag("ObstacleObj"))
+        {
+            obstacleFX.Play();
+            audios[0].Play();
+            ChangeStack(false);
+        }
     }
 
     void CameraEffect(Vector3 startPos, Vector3 endPos)
