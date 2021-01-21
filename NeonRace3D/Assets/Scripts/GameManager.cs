@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
         
         rivalController.speed = 0;
 
-        var animS = _player.GetComponent<PlayerImageController>().animPlayer;
+        var animS = _player.GetComponentInChildren<PlayerImageController>().animPlayer;
         if (playerName == "Player")
         {
             youLose.gameObject.SetActive(false);
