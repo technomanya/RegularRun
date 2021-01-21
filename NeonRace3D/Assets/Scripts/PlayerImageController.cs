@@ -241,6 +241,7 @@ public class PlayerImageController : MonoBehaviour
     {
         if (col.transform.CompareTag("PowerObj"))
         {
+            Debug.Log("POWEROBJ");
             powerFX.Play();
             audios[1].Play();
             ChangeStack(true);
@@ -248,6 +249,7 @@ public class PlayerImageController : MonoBehaviour
         }
         else if (col.transform.CompareTag("ObstacleObj"))
         {
+            Debug.Log("OBSTACLEOBJ");
             obstacleFX.Play();
             audios[0].Play();
             ChangeStack(false);
