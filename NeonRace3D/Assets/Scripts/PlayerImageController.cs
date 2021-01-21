@@ -275,9 +275,9 @@ public class PlayerImageController : MonoBehaviour
         ShieldMain.SetActive(true);
         if (cond)
         {
-            var shieldInstance = Instantiate(ShieldStackPrefab, new Vector3(0.25f,1.7f,0f), Quaternion.identity);
+            var shieldInstance = Instantiate(ShieldStackPrefab, ShieldStackPrefab.transform.position, Quaternion.identity);
             shieldInstance.transform.parent = ShieldStackParent.transform;
-            shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+            //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
             shieldInstance.transform.localEulerAngles = new Vector3(90,0,0);
             if(ShieldStack.Count > 0)
             {
@@ -296,7 +296,7 @@ public class PlayerImageController : MonoBehaviour
             }
             else
             {
-                GM.GameOver("LOSE", animPlayer);
+                GM.GameOver("LOSE");
             }
         }
     }
@@ -318,7 +318,7 @@ public class PlayerImageController : MonoBehaviour
                     
                     var shieldInstance = Instantiate(ShieldStackPrefab, new Vector3(0.25f, 1.7f, 0f), Quaternion.identity);
                     shieldInstance.transform.parent = ShieldStackParent.transform;
-                    shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+                    //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
                     shieldInstance.transform.localEulerAngles = new Vector3(90,0,0) ;
 
                     shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 1].transform.position;
@@ -349,7 +349,7 @@ public class PlayerImageController : MonoBehaviour
             else
             {
                 animPlayer = GetComponentsInChildren<Animator>();
-                GM.GameOver("LOSE", animPlayer);
+                GM.GameOver("LOSE");
             }
         }
     }
