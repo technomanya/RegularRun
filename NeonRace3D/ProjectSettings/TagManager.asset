@@ -28,6 +28,7 @@ TagManager:
   - ShieldStack
   - FinalStack
   - BodyPart
+  - FinalTrigger
   layers:
   - Default
   - TransparentFX
