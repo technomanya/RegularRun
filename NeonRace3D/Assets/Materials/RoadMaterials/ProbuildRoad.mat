@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ProbuildRoad
-  m_Shader: {fileID: 4800000, guid: 1ccecd9b89b8a4f14bfb64f29ddfcc81, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -63,6 +63,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: abc83c21d57d4a74cabe12065fa1a8b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SecondTex:
         m_Texture: {fileID: 2800000, guid: 4182de133a897cb4285e006a48ca86cb, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -83,12 +87,19 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RampSmooth: 0.26
+    - _RampThreshold: 0.938
+    - _Shininess: 0.01
     - _SmoothnessTextureChannel: 0
+    - _SpecSmooth: 0.05
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.5492168, g: 0.9622642, b: 0.9047021, a: 1}
+    - _Color: {r: 0.5451228, g: 0.9245283, b: 0.9033446, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+    - _SColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+    - _SpecColor: {r: 0.18178178, g: 0.31765148, b: 0.8962264, a: 1}
   m_BuildTextureStacks: []
