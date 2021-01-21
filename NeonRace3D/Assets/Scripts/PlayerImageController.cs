@@ -242,7 +242,7 @@ public class PlayerImageController : MonoBehaviour
         if (col.transform.CompareTag("PowerObj"))
         {
             Debug.Log("POWEROBJ");
-            powerFX.Play();
+            
             audios[1].Play();
             ChangeStack(true);
             col.gameObject.SetActive(false);
@@ -339,6 +339,8 @@ public class PlayerImageController : MonoBehaviour
                     shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 1].transform.position;
                     shieldInstance.transform.Translate(Vector3.down * 1f);
 
+                    powerFX.transform.position = shieldInstance.transform.position;
+                    powerFX.Play();
                     ShieldStack.Add(shieldInstance);
                 }
                 else if(shieldCount < ShieldStack.Count)
