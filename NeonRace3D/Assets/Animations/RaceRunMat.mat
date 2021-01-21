@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RaceRunMat
-  m_Shader: {fileID: 4800000, guid: f8d49205b3b0a644195633020367689d, type: 3}
+  m_Shader: {fileID: 4800000, guid: edcdbfa66a120674dbfcc060a54ab1eb, type: 3}
   m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -75,7 +75,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.042
     - _GlossyReflections: 1
-    - _Metallic: 0.203
+    - _Metallic: 0.177
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offset1: 0
@@ -88,6 +88,7 @@ Material:
     - _RimMax: 0.85
     - _RimMin: 0.6
     - _RimStrength: 0.5
+    - _Smoothness: 0.293
     - _SmoothnessTextureChannel: 0
     - _SpecBlend: 1
     - _SpecSmooth: 1
@@ -110,6 +111,6 @@ Material:
     - _HColor: {r: 0.8773585, g: 0.8766761, b: 0.1448469, a: 1}
     - _OutlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
+    - _SColor: {r: 0.6226415, g: 0.14978638, b: 0.1551306, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
