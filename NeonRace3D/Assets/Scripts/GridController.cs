@@ -115,9 +115,9 @@ public class GridController : MonoBehaviour
             }
             else
             {
-                tronRunning.ResetTrigger("RightTurn");
-                tronRunning.ResetTrigger("LeftTurn");
-                tronRunning.SetTrigger("RunIdle");
+                //tronRunning.ResetTrigger("RightTurn");
+                //tronRunning.ResetTrigger("LeftTurn");
+                //tronRunning.SetTrigger("RunIdle");
                 gameObject.transform.Rotate(Vector3.forward, 0.0f);
             }
         }

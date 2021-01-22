@@ -5,64 +5,54 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private float distanceMain;
+    [SerializeField]private bool effectOn = false;
 
-    private float offsetX;
-    private float offsetY;
-    private float offsetZ;
-    private bool side = true;
+    public List<int> list = new List<int>();
 
-    public Vector3 angleBefore;
-    public Vector3 angleLast;
+    public float speed;
 
-    private void Start()
+    void Awake()
     {
-        player = transform.parent.gameObject;
-        offset = transform.position - player.transform.position;
-        distanceMain = Mathf.Abs(offset.magnitude);
+        for (int i = 0; i < 5; i++)
+        {
+            list.Add(5);
+        }
+
+        list[4] = 0;
+
+        foreach (var item in list)
+        {
+            Debug.Log(item);
+        }
     }
 
-    private void Update()
+    void Start()
     {
-        angleBefore = player.transform.eulerAngles;
+        list[0] = list[list.Count - 1];
+        foreach (var item in list)
+        {
+            Debug.Log(item);
+        }
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        //angleLast = player.transform.eulerAngles;
-        //if(angleLast.x > angleBefore.x || angleLast.y > angleBefore.y )
-        //    CameraEffect(true);
-        //else if(angleLast.x < angleBefore.x || angleLast.y < angleBefore.y)
-        //    CameraEffect(false);
+        if(effectOn)
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0,-60,0), Time.deltaTime * speed);
     }
 
     public void CameraEffect()
     {
-        if (Random.Range(-3, 2) < 0)
-            side = false;
-        else
-            side = true;
-
-        if (side)
-        {
-          transform.localPosition = Vector3.Slerp(transform.localPosition,new Vector3(-2, 0, -1),Time.deltaTime);
-          transform.localEulerAngles = new Vector3(0,45,0);
-        }
-        else
-        {
-          transform.localPosition = new Vector3(2, 0, -1);
-          transform.localEulerAngles = new Vector3(0,-45,0);
-        }
-
-        StartCoroutine(Reset());
+        effectOn = true;
+        //transform.localEulerAngles = new Vector3(0, 45, 0);
+        
+        // StartCoroutine(Reset());
     }
 
     IEnumerator Reset()
     {
-        yield return new WaitForSeconds(0.5f);
-        transform.localPosition = Vector3.zero;
-        transform.localEulerAngles =Vector3.zero;
+        yield return new WaitForSeconds(2.0f);
+        effectOn = false;
+        transform.localEulerAngles =new Vector3(0,-90,0);
     }
 }

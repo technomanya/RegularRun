@@ -234,7 +234,6 @@ public class PlayerImageController : MonoBehaviour
             audios[0].Play();
             ChangeStack(false);
         }
-
     }
 
     void OnCollisionEnter(Collision col)
@@ -253,6 +252,12 @@ public class PlayerImageController : MonoBehaviour
             obstacleFX.Play();
             audios[0].Play();
             ChangeStack(false);
+        }
+
+        else if (col.transform.CompareTag("FinalTrigger"))
+        {
+            MainCamera.gameObject.GetComponentInParent<CameraController>().CameraEffect();
+            PlayerControllerWP.PlayerSpeed = 15.0f;
         }
     }
 
@@ -291,6 +296,7 @@ public class PlayerImageController : MonoBehaviour
         if (cond)
         {
             var shieldInstance = Instantiate(ShieldStackPrefab, ShieldStackPrefab.transform.position, Quaternion.identity);
+
             shieldInstance.transform.parent = ShieldStackParent.transform;
             //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
             shieldInstance.transform.localEulerAngles = new Vector3(90,0,0);
@@ -300,7 +306,6 @@ public class PlayerImageController : MonoBehaviour
                 shieldInstance.transform.Translate(Vector3.down * 0.5f);
                 
             }
-
             ShieldStack.Add(shieldInstance);
         }
         else
@@ -331,7 +336,7 @@ public class PlayerImageController : MonoBehaviour
                 if (shieldCount >= ShieldStack.Count)
                 {
                     
-                    var shieldInstance = Instantiate(ShieldStackPrefab, new Vector3(0.25f, 1.7f, 0f), Quaternion.identity);
+                    var shieldInstance = Instantiate(ShieldStackPrefab, ShieldStackPrefab.transform.position, Quaternion.identity);
                     shieldInstance.transform.parent = ShieldStackParent.transform;
                     //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
                     shieldInstance.transform.localEulerAngles = new Vector3(90,0,0) ;
@@ -357,10 +362,29 @@ public class PlayerImageController : MonoBehaviour
         {
             if (ShieldStack.Count > 0)
             {
-                var shieldTemp = ShieldStack[ShieldStack.Count - 1];
-                shieldTemp.SetActive(false);
-                ShieldStack.Remove(shieldTemp);
-                ShieldStackDisable.Add(shieldTemp);
+                ShieldStack[0].GetComponentInChildren<Animator>().SetBool("GameOver", true);
+
+                var posLast = ShieldStack[ShieldStack.Count-1].transform.localPosition;
+                var posFirst = ShieldStack[0].transform.localPosition;
+
+                var firstObj = ShieldStack[0];
+                var lastObj = ShieldStack[ShieldStack.Count - 1];
+                firstObj.transform.parent = null;
+
+                
+                
+                lastObj.transform.localPosition = posFirst;
+                ShieldStack[ShieldStack.Count - 1] = firstObj;
+                ShieldStack[0] = lastObj;
+
+                //ShieldStack[ShieldStack.Count - 1].transform.localPosition = posLast;
+                //ShieldStack[ShieldStack.Count - 1].SetActive(false);
+
+                var coroutine = DisableFallen(ShieldStack[ShieldStack.Count - 1], posLast, 2);
+                StartCoroutine(coroutine);
+
+                ShieldStack.Remove(firstObj);
+                ShieldStackDisable.Add(firstObj);
 
             }
             else
@@ -369,5 +393,14 @@ public class PlayerImageController : MonoBehaviour
                 GM.GameOver("LOSE");
             }
         }
+    }
+
+    IEnumerator DisableFallen(GameObject fallen, Vector3 fallenPos, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        fallen.transform.parent = ShieldStackParent.transform;
+        fallen.transform.localPosition = fallenPos;
+        fallen.SetActive(false);
     }
 }
