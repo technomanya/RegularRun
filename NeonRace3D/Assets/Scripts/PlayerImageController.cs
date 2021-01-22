@@ -390,6 +390,7 @@ public class PlayerImageController : MonoBehaviour
             else
             {
                 ShieldMain.SetActive(true);
+                animPlayer = GetComponentsInChildren<Animator>();
                 //animPlayer = ShieldMain.GetComponentsInChildren<Animator>();
                 //foreach (var anim in animPlayer)
                 //{

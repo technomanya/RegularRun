@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
+    public Transform player;
+    public Transform finishLine;
 
+    private float maxDistance;
+    private float currDistance;
 
     public Transform loadingBar;
 
@@ -19,15 +23,23 @@ public class Loading : MonoBehaviour
     
     public void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //finishLine = GameObject.FindGameObjectWithTag("Finish").transform;
+
         load = this;
         currentAmountpointer = 0;
     }
 
+    public void Start()
+    {
+        maxDistance = Vector3.Distance(player.position , finishLine.position);
+        currDistance = 0;
+    }
 
     void Update()
-    { 
-        
-       loadingBar.GetComponent<Image>().fillAmount = currentAmount / 1000;
+    {
+        currDistance = Vector3.Distance(player.position, finishLine.position);
+        loadingBar.GetComponent<Image>().fillAmount = (maxDistance - currDistance) / maxDistance;
 
     }
 
