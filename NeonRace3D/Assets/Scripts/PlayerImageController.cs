@@ -355,7 +355,7 @@ public class PlayerImageController : MonoBehaviour
                     ShieldStack.Add(shieldTemp);
                     ShieldStack[shieldCount].SetActive(true);
                 }
-               
+                animPlayer = GetComponentsInChildren<Animator>();
             }
         }
         else
@@ -390,6 +390,10 @@ public class PlayerImageController : MonoBehaviour
             else
             {
                 animPlayer = GetComponentsInChildren<Animator>();
+                foreach (var anim in animPlayer)
+                {
+                    anim.SetInteger("DanceMode", 1);
+                }
                 GM.GameOver("LOSE");
             }
         }
