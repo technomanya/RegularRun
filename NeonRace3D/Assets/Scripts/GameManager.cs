@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
             CurrenLevel = Levels[0];
         }
 
-        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "GameScene 2")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "GameScene 2"|| SceneManager.GetActiveScene().name == "GameSceneCiftAdam")
         {
             foreach (var gridPref in LevelRoad)
             {

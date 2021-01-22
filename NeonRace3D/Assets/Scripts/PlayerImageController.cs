@@ -389,11 +389,14 @@ public class PlayerImageController : MonoBehaviour
             }
             else
             {
-                animPlayer = GetComponentsInChildren<Animator>();
-                foreach (var anim in animPlayer)
-                {
-                    anim.SetInteger("DanceMode", 1);
-                }
+                ShieldMain.SetActive(true);
+                //animPlayer = ShieldMain.GetComponentsInChildren<Animator>();
+                //foreach (var anim in animPlayer)
+                //{
+                //    anim.SetInteger("DanceMode", 1);
+                //}
+
+                MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
                 GM.GameOver("LOSE");
             }
         }

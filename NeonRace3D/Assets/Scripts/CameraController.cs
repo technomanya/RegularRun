@@ -6,10 +6,12 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]private bool effectOn = false;
+    [SerializeField]private bool effectGameOver = false;
 
     public List<int> list = new List<int>();
 
     public float speed;
+    
 
     void Awake()
     {
@@ -39,6 +41,14 @@ public class CameraController : MonoBehaviour
     {
         if(effectOn)
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0,-60,0), Time.deltaTime * speed);
+
+        if(effectGameOver)
+        {
+            transform.localPosition =
+                Vector3.Slerp(transform.localPosition, new Vector3(0, -3, -7), Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-5, -180, 0),
+                Time.deltaTime * speed);
+        }
     }
 
     public void CameraEffect()
@@ -47,6 +57,11 @@ public class CameraController : MonoBehaviour
         //transform.localEulerAngles = new Vector3(0, 45, 0);
         
         // StartCoroutine(Reset());
+    }
+
+    public void GameOverEffect()
+    {
+        effectGameOver = true;
     }
 
     IEnumerator Reset()
