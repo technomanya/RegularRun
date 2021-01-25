@@ -354,7 +354,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
         else
         {
             GM.PointAddByType(GameManager.PointSystem.NegativePoint, 10);
-            if (ShieldStack.Count > 0)
+            if (ShieldStack.Count > 1)
             {
                 if(fallenIndex < FallenAnimated.Count)
                 {
