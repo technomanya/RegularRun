@@ -262,26 +262,26 @@ public class GameManager : MonoBehaviour
         
         rivalController.speed = 0;
 
-        var animS = _player.GetComponentInChildren<PlayerImageController>().animPlayer;
+        //var animS = _player.GetComponentInChildren<PlayerImageController>().animPlayer;
         if (playerName == "Player")
         {
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
 
             
-            foreach (var anim in animS)
-            {
-                anim.SetInteger("DanceMode", 1);
-            }
+            //foreach (var anim in animS)
+            //{
+            //    anim.SetInteger("DanceMode", 1);
+            //}
         }
         else
         {
             youWin.gameObject.SetActive(false);
             youLose.gameObject.SetActive(true);
-            foreach (var anim in animS)
-            {
-                anim.SetBool("GameOver", true);
-            }
+            //foreach (var anim in animS)
+            //{
+            //    anim.SetBool("GameOver", true);
+            //}
         }
         PointAddByType(PointSystem.Seconds, (int)Time.realtimeSinceStartup);
         var coin = Mathf.Clamp((int)(_positivePoint - _negativePoint), 0, Mathf.Infinity);

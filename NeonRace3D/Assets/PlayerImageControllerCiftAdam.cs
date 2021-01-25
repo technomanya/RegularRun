@@ -25,9 +25,12 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
     public Camera MainCamera;
     public GameObject[] SpeedBars;
     public GameObject JetObj;
+
+    [Header("StackProperties")]
     public List<GameObject> ShieldStack = new List<GameObject>();
     public List<GameObject> ShieldStackDisable = new List<GameObject>();
-    public GameObject ShieldStackPrefab;
+    public GameObject ShieldStackPrefabLeft;
+    public GameObject ShieldStackPrefabRight;
     public GameObject ShieldStackParent;
     public GameObject ShieldMain;
     public int stackCount;
@@ -290,20 +293,40 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
     void MakeStack(bool cond)
     {
-        ShieldMain.SetActive(true);
+        //ShieldMain.SetActive(false);
         if (cond)
         {
-            var shieldInstance = Instantiate(ShieldStackPrefab, ShieldStackPrefab.transform.position, Quaternion.identity);
-
-            shieldInstance.transform.parent = ShieldStackParent.transform;
-            //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
-            shieldInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
-            if (ShieldStack.Count > 0)
+            var shieldCount = GameObject.FindGameObjectsWithTag("ShieldStack").Length;
+            GameObject shieldInstance;
+            if (shieldCount % 2 == 1)
             {
-                shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 1].transform.position;
-                shieldInstance.transform.Translate(Vector3.down * 0.5f);
+                shieldInstance = Instantiate(ShieldStackPrefabLeft, ShieldStackPrefabLeft.transform.position, Quaternion.identity);
 
+                shieldInstance.transform.parent = ShieldStackParent.transform;
+                //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+                shieldInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
+                if (ShieldStack.Count > 0)
+                {
+                    shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 2].transform.position;
+                    shieldInstance.transform.Translate(Vector3.down * 0.5f);
+
+                }
             }
+            else
+            {
+                shieldInstance = Instantiate(ShieldStackPrefabRight, ShieldStackPrefabRight.transform.position, Quaternion.identity);
+
+                shieldInstance.transform.parent = ShieldStackParent.transform;
+                //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+                shieldInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
+                if (ShieldStack.Count > 0)
+                {
+                    shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 2].transform.position;
+                    shieldInstance.transform.Translate(Vector3.down * 0.5f);
+
+                }
+            }
+            
             ShieldStack.Add(shieldInstance);
         }
         else
@@ -331,27 +354,55 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
             {
 
                 var shieldCount = GameObject.FindGameObjectsWithTag("ShieldStack").Length;
-                if (shieldCount >= ShieldStack.Count)
+                
+                if (ShieldStackDisable.Count == 0)
                 {
+                    GameObject shieldInstance;
+                    
+                    if (shieldCount % 2 == 1)
+                    {
+                        shieldInstance = Instantiate(ShieldStackPrefabLeft, ShieldStackPrefabLeft.transform.position, Quaternion.identity);
 
-                    var shieldInstance = Instantiate(ShieldStackPrefab, ShieldStackPrefab.transform.position, Quaternion.identity);
-                    shieldInstance.transform.parent = ShieldStackParent.transform;
-                    //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
-                    shieldInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
+                        shieldInstance.transform.parent = ShieldStackParent.transform;
+                        //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+                        shieldInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
+                        if (ShieldStack.Count > 0)
+                        {
+                            shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 2].transform.position;
+                            shieldInstance.transform.Translate(Vector3.down * 0.5f);
 
-                    shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 1].transform.position;
-                    shieldInstance.transform.Translate(Vector3.down * 1f);
+                        }
+                    }
+                    else
+                    {
+                        shieldInstance = Instantiate(ShieldStackPrefabRight, ShieldStackPrefabRight.transform.position, Quaternion.identity);
+                        shieldInstance.transform.parent = ShieldStackParent.transform;
+                        //shieldInstance.transform.localScale = new Vector3(0.2f,0.5f,0.2f);
+                        shieldInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
+                        if (ShieldStack.Count > 0)
+                        {
+                            shieldInstance.transform.position = ShieldStack[ShieldStack.Count - 2].transform.position;
+                            shieldInstance.transform.Translate(Vector3.down * 0.5f);
+
+                        }
+                    }
+
 
                     powerFX.transform.position = shieldInstance.transform.position;
                     powerFX.Play();
                     ShieldStack.Add(shieldInstance);
                 }
-                else if (shieldCount < ShieldStack.Count)
+                else if (ShieldStackDisable.Count > 0)
                 {
-                    var shieldTemp = ShieldStackDisable[0];
+                    if (shieldCount % 2 == 1)
+                    {
+
+                    }
+                    var shieldTemp = ShieldStackDisable[ShieldStackDisable.Count-1];
+                    shieldTemp.SetActive(true);
                     ShieldStackDisable.Remove(shieldTemp);
                     ShieldStack.Add(shieldTemp);
-                    ShieldStack[shieldCount].SetActive(true);
+                    
                 }
                 animPlayer = GetComponentsInChildren<Animator>();
             }
@@ -378,11 +429,12 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
                 //ShieldStack[ShieldStack.Count - 1].transform.localPosition = posLast;
                 //ShieldStack[ShieldStack.Count - 1].SetActive(false);
 
-                var coroutine = DisableFallen(ShieldStack[ShieldStack.Count - 1], posLast, 2);
-                StartCoroutine(coroutine);
-
+                var coroutine = DisableFallen(ShieldStack[ShieldStack.Count - 1], posLast, 3);
                 ShieldStack.Remove(firstObj);
                 ShieldStackDisable.Add(firstObj);
+                StartCoroutine(coroutine);
+
+                
 
             }
             else
@@ -407,6 +459,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
         fallen.transform.parent = ShieldStackParent.transform;
         fallen.transform.localPosition = fallenPos;
+        fallen.transform.localRotation = Quaternion.Euler(90,0,0);
         fallen.SetActive(false);
     }
 }
