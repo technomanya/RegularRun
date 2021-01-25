@@ -29,6 +29,11 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
     [Header("StackProperties")]
     public List<GameObject> ShieldStack = new List<GameObject>();
     public List<GameObject> ShieldStackDisable = new List<GameObject>();
+    public List<GameObject> FallenAnimated;
+    private int fallenIndex=0;
+    private Vector3 fallenMainPosLeft;
+    private Vector3 fallenMainPosRight;
+
     public GameObject ShieldStackPrefabLeft;
     public GameObject ShieldStackPrefabRight;
     public GameObject ShieldStackParent;
@@ -38,6 +43,9 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
     void Start()
     {
+        fallenMainPosLeft = FallenAnimated[0].transform.localPosition;
+        fallenMainPosRight = FallenAnimated[1].transform.localPosition;
+
         animPlayer = GetComponentsInChildren<Animator>();
         for (int i = 0; i < stackCount; i++)
         {
@@ -165,64 +173,6 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.transform.parent.CompareTag("Obstacle") )
-        //{
-
-        //    if(sprintBegin == 0 && slowBegin == 0)
-        //    {
-        //        //Debug.Log("ObstacleHit");
-        //        slowBegin = Time.timeSinceLevelLoad;
-        //        //PlayerControllerWP.PlayerSpeed = minSpeed;
-        //        //if (speed >= minSpeed)
-        //        //{
-        //        //    speed -= speed * 0.3f;
-        //        //    PlayerControllerWP.PlayerSpeed = minSpeed;
-        //        //}
-        //        //Destroy(other.gameObject);
-        //        other.gameObject.GetComponent<Renderer>().enabled = false;
-        //        obstacleFX.Play();
-        //        audios[0].Play();
-        //        gridCon.tronRunning.SetTrigger("Stumble");
-        //    }
-
-        //    GM.PointAddByType(GameManager.PointSystem.NegativePoint, 5);
-        //    //gameObject.GetComponent<GridController>().speed -= gameObject.GetComponent<GridController>().speed * 0.2f;
-        //}
-        //else if (other.transform.parent.CompareTag("Power"))
-        //{
-        //    //Debug.Log("PowerHit");
-        //    if(sprintBegin == 0 )
-        //    {
-        //        if (powerCounter < 4)
-        //        {
-        //            powerCounter++;
-        //        }
-        //        else
-        //        {
-        //            powerCounter = 0;
-        //        }
-
-        //        //if (speed <= maxSpeed)
-        //        //{
-        //        //    speed += speed;
-        //        //    PlayerControllerWP.PlayerSpeed = speed;
-        //        //}
-        //        //Destroy(other.gameObject);
-        //        other.gameObject.GetComponent<Renderer>().enabled = false;
-        //        powerFX.Play();
-        //        audios[1].Play();
-        //        gridCon.tronRunning.SetTrigger("Sprint");
-        //    }
-
-        //    GM.PointAddByType(GameManager.PointSystem.PositivePoint, 10);
-        //    //gameObject.GetComponent<GridController>().speed *= 2;
-        //}
-
-        //if (other.transform.CompareTag("CoinObj"))
-        //{
-        //    GM.RealCoins++;
-        //    other.GetComponent<Renderer>().enabled = false;
-        //}
         if (other.transform.CompareTag("PowerObj"))
         {
             powerFX.Play();
@@ -344,22 +294,27 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
     void ChangeStack(bool cond)
     {
-        if (ShieldStack.Count == 0)
-            ShieldMain.SetActive(false);
-
         if (cond)
         {
-
+            GM.PointAddByType(GameManager.PointSystem.PositivePoint, 10);
             if (ShieldStack.Count > 0)
             {
 
                 var shieldCount = GameObject.FindGameObjectsWithTag("ShieldStack").Length;
                 
-                if (ShieldStackDisable.Count == 0)
+                if (ShieldStackDisable.Count > 0)
+                {
+                    var shieldTemp = ShieldStackDisable[ShieldStackDisable.Count - 1];
+                    shieldTemp.SetActive(true);
+                    ShieldStackDisable.Remove(shieldTemp);
+                    ShieldStack.Add(shieldTemp);
+
+                }
+                else 
                 {
                     GameObject shieldInstance;
-                    
-                    if (shieldCount % 2 == 1)
+
+                    if (shieldCount % 2 == 0)
                     {
                         shieldInstance = Instantiate(ShieldStackPrefabLeft, ShieldStackPrefabLeft.transform.position, Quaternion.identity);
 
@@ -391,49 +346,44 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
                     powerFX.transform.position = shieldInstance.transform.position;
                     powerFX.Play();
                     ShieldStack.Add(shieldInstance);
-                }
-                else if (ShieldStackDisable.Count > 0)
-                {
-                    if (shieldCount % 2 == 1)
-                    {
 
-                    }
-                    var shieldTemp = ShieldStackDisable[ShieldStackDisable.Count-1];
-                    shieldTemp.SetActive(true);
-                    ShieldStackDisable.Remove(shieldTemp);
-                    ShieldStack.Add(shieldTemp);
-                    
                 }
                 animPlayer = GetComponentsInChildren<Animator>();
             }
         }
         else
         {
+            GM.PointAddByType(GameManager.PointSystem.NegativePoint, 10);
             if (ShieldStack.Count > 0)
             {
-                ShieldStack[0].GetComponentInChildren<Animator>().SetBool("GameOver", true);
+                if(fallenIndex < FallenAnimated.Count)
+                {
+                    var fallenItem = FallenAnimated[fallenIndex];
+                    fallenItem.SetActive(true);
+                    fallenItem.GetComponentInChildren<Animator>().SetTrigger("Stumble");
+                    fallenItem.transform.parent = null;
+                    if (fallenIndex % 2 == 0)
+                    {
+                        var coroutine = DisableFallen(fallenItem, fallenMainPosLeft, 2);
+                        StartCoroutine(coroutine);
+                        
+                    }
+                    else
+                    {
+                        var coroutine = DisableFallen(fallenItem, fallenMainPosLeft, 2);
+                        StartCoroutine(coroutine);
+                    }
 
-                var posLast = ShieldStack[ShieldStack.Count - 1].transform.localPosition;
-                var posFirst = ShieldStack[0].transform.localPosition;
-
-                var firstObj = ShieldStack[0];
+                    fallenIndex++;
+                }
+                else
+                {
+                    fallenIndex = 0;
+                }
                 var lastObj = ShieldStack[ShieldStack.Count - 1];
-                firstObj.transform.parent = null;
-
-
-
-                lastObj.transform.localPosition = posFirst;
-                ShieldStack[ShieldStack.Count - 1] = firstObj;
-                ShieldStack[0] = lastObj;
-
-                //ShieldStack[ShieldStack.Count - 1].transform.localPosition = posLast;
-                //ShieldStack[ShieldStack.Count - 1].SetActive(false);
-
-                var coroutine = DisableFallen(ShieldStack[ShieldStack.Count - 1], posLast, 3);
-                ShieldStack.Remove(firstObj);
-                ShieldStackDisable.Add(firstObj);
-                StartCoroutine(coroutine);
-
+                lastObj.SetActive(false);
+                ShieldStack.Remove(lastObj);
+                ShieldStackDisable.Add(lastObj);
                 
 
             }
@@ -441,15 +391,22 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
             {
                 ShieldMain.SetActive(true);
                 animPlayer = GetComponentsInChildren<Animator>();
-                //animPlayer = ShieldMain.GetComponentsInChildren<Animator>();
-                //foreach (var anim in animPlayer)
-                //{
-                //    anim.SetInteger("DanceMode", 1);
-                //}
+
+                foreach (var anim in animPlayer)
+                {
+                    anim.SetBool("GameOver", true);
+                }
 
                 MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
                 GM.GameOver("LOSE");
             }
+        }
+
+        if (ShieldStack.Count == 1)
+            ShieldMain.SetActive(true);
+        else if(ShieldStack.Count > 1)
+        {
+            ShieldMain.SetActive(false);
         }
     }
 

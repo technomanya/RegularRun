@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     public List<int> list = new List<int>();
 
     public float speed;
+
+    public Transform Castle;
     
 
     void Awake()
@@ -35,6 +37,11 @@ public class CameraController : MonoBehaviour
         {
             Debug.Log(item);
         }
+    }
+
+    void Update()
+    {
+        Castle.localRotation = Quaternion.Euler(0,180, -gameObject.transform.parent.rotation.eulerAngles.z);
     }
 
     void LateUpdate()

@@ -38,58 +38,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Player Attributes")]
     public PlayerControllerWaypoint playerControllerWP;
-    public FakePlayerController rivalController;
+    //public FakePlayerController rivalController;
     private float tempSpeedPlayer;
-    private float tempSpeedRival;
+    //private float tempSpeedRival;
     private Vector3 _playerPosStart;
-    private Vector3 _fakePlayerPosStart;
+    //private Vector3 _fakePlayerPosStart;
     private Quaternion _playerRotStart;
-    private Quaternion _fakePlayerRotStart;
+    //private Quaternion _fakePlayerRotStart;
     public GameObject _player;
-    private GameObject _fakePlayer;
-
-    [Space(10)]
-
-    [Header("LevelSystem")]
-    public int CurrentLvlId;
-    public int LevelCount;
-    public GameObject[] LevelRoad;
-    public GameObject CoinRoad;
-    public Level[] Levels;
-    public Level CurrenLevel;
-    public Level CoinLevel;
 
 
-
-
-    public class Level
-    {
-        private string _levelName { get; set; }
-        private int _levelId { get; set; }
-        private GameObject _levelRoad;
-
-        public Level(string name, int id, GameObject road)
-        {
-            _levelName = name;
-            _levelId = id;
-            _levelRoad = road;
-        }
-
-        public GameObject GetLevelRoad()
-        {
-            return _levelRoad;
-        }
-
-        public string GetLevelName()
-        {
-            return _levelName;
-        }
-
-        public int GetLevelId()
-        {
-            return _levelId;
-        }
-    }
 
     public enum  SceneIndexConstant
     {
@@ -111,48 +69,9 @@ public class GameManager : MonoBehaviour
         //CoinText.gameObject.transform.parent.gameObject.SetActive(false);
         Time.timeScale = 0;
 
-        int id = 0;
-        string name = "Level-";
-        List<Level> tempLevelList = new List<Level>();
-        foreach (var road in LevelRoad)
-        {
-            Level tempLevel = new Level(name + id, id, road);
-            tempLevelList.Add(tempLevel);
-        }
 
-        Levels = tempLevelList.ToArray();
-        CoinLevel = new Level("Bonus Level", 9, CoinRoad);
-
-        if (PlayerPrefs.HasKey("Coin"))
-        {
-            CoinGeneral = PlayerPrefs.GetInt("Coin");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("Coin", 0);
-        }
-
-        if (PlayerPrefs.HasKey("SavedLevelId"))
-        {
-            CurrenLevel = Levels[PlayerPrefs.GetInt("SavedLevelId")];
-        }
-        else
-        {
-            CurrenLevel = Levels[0];
-        }
-
-        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "GameScene 2"|| SceneManager.GetActiveScene().name == "GameSceneCiftAdam")
-        {
-            foreach (var gridPref in LevelRoad)
-            {
-                if(gridPref.activeInHierarchy)
-                    gridPref.SetActive(false);
-            }
-            //int randGrid = Random.Range(0, LevelRoad.Length-1);
-            CurrenLevel.GetLevelRoad().SetActive(true);
-            gridList = GameObject.FindGameObjectsWithTag("Grid");
-        }
-        else if(SceneManager.GetActiveScene().name == "SceneMaker")
+        gridList = GameObject.FindGameObjectsWithTag("Grid");
+        if (SceneManager.GetActiveScene().name == "SceneMaker")
         {
             finishLine = GameObject.FindGameObjectWithTag("Finish");
             GameObject beforeGrid = new GameObject();
@@ -226,15 +145,24 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("Coin"))
+        {
+            CoinGeneral = PlayerPrefs.GetInt("Coin");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Coin", 0);
+            CoinGeneral = 0;
+        }
         audioSource = GetComponent<AudioSource>();
         playerControllerWP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControllerWaypoint>();
-        rivalController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<FakePlayerController>();
+        //rivalController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<FakePlayerController>();
         _player = GameObject.FindGameObjectWithTag("Player");
-        _fakePlayer = GameObject.FindGameObjectWithTag("Enemy");
+        //_fakePlayer = GameObject.FindGameObjectWithTag("Enemy");
         _playerPosStart = _player.transform.position;
         _playerRotStart = _player.transform.rotation;
-        _fakePlayerPosStart = _fakePlayer.transform.position;
-        _fakePlayerRotStart = _fakePlayer.transform.rotation;
+        //_fakePlayerPosStart = _fakePlayer.transform.position;
+        //_fakePlayerRotStart = _fakePlayer.transform.rotation;
     }
 
     void Update()
@@ -260,19 +188,19 @@ public class GameManager : MonoBehaviour
         playerControllerWP.PlayerSpeed = 0;
         _player.GetComponent<SphereCollider>().enabled = false;
         
-        rivalController.speed = 0;
+        //rivalController.speed = 0;
 
-        //var animS = _player.GetComponentInChildren<PlayerImageController>().animPlayer;
+        var animS = _player.GetComponentInChildren<PlayerImageControllerCiftAdam>().animPlayer;
         if (playerName == "Player")
         {
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
 
-            
-            //foreach (var anim in animS)
-            //{
-            //    anim.SetInteger("DanceMode", 1);
-            //}
+
+            foreach (var anim in animS)
+            {
+                anim.SetInteger("DanceMode", 1);
+            }
         }
         else
         {
@@ -284,12 +212,11 @@ public class GameManager : MonoBehaviour
             //}
         }
         PointAddByType(PointSystem.Seconds, (int)Time.realtimeSinceStartup);
-        var coin = Mathf.Clamp((int)(_positivePoint - _negativePoint), 0, Mathf.Infinity);
-        var score = coin * 7;
-        if(RealCoins>0)
-            coin += RealCoins * 3;
 
-        CoinGeneral = PlayerPrefs.GetInt("Coin") +(int)coin;
+        var coin = Mathf.Clamp((int)(_positivePoint - _negativePoint), 0, Mathf.Infinity);
+        var score = (int)(coin * 7);
+
+        CoinGeneral +=score;
         CoinText.text = CoinGeneral.ToString();
         ScoreText.text = score.ToString();
         PlayerPrefs.SetInt("Coin",CoinGeneral);
@@ -325,30 +252,17 @@ public class GameManager : MonoBehaviour
         GameOverObj.SetActive(false);
         _player.transform.position = _playerPosStart;
         _player.transform.rotation = _playerRotStart;
-        _fakePlayer.transform.position = _fakePlayerPosStart;
-        _fakePlayer.transform.rotation = _fakePlayerRotStart;
+        //_fakePlayer.transform.position = _fakePlayerPosStart;
+        //_fakePlayer.transform.rotation = _fakePlayerRotStart;
         //_player.GetComponentInChildren<PlayerImageController>().ChangeAnimator(true);
         tempSpeedPlayer = playerControllerWP.PlayerSpeed;
-        tempSpeedRival = rivalController.speed;
-        CurrenLevel.GetLevelRoad().SetActive(true);
+        //tempSpeedRival = rivalController.speed;
         gridList = GameObject.FindGameObjectsWithTag("Grid");
         Gcontroller.GridControllerBegin();
         playerControllerWP.PlayerControlBegin();
         Time.timeScale = 1;
     }
 
-    public void NewLevel()
-    {
-        foreach (var wayPoint in playerControllerWP._wayPoints)
-        {
-            wayPoint.transform.SetParent(CurrenLevel.GetLevelRoad().transform);
-        }
-        
-        CurrenLevel.GetLevelRoad().SetActive(false);
-        CurrenLevel = ChangeLevel(CurrenLevel.GetLevelId());
-        Begin();
-
-    }
     public void PauseContinue(bool state)
     {
         
@@ -356,13 +270,13 @@ public class GameManager : MonoBehaviour
         {
             //Time.timeScale = 0;
             playerControllerWP.PlayerSpeed = 0;
-            rivalController.speed = 0;
+            //rivalController.speed = 0;
         }
         else
         {
             //  Time.timeScale = 1;
             playerControllerWP.PlayerSpeed = tempSpeedPlayer;
-            rivalController.speed = tempSpeedRival;
+            //rivalController.speed = tempSpeedRival;
         }
     }
 
@@ -382,15 +296,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    Level ChangeLevel(int currLevelId)
-    {
-        if (currLevelId + 1 >= Levels.Length)
-            return Levels[0];
-        else
-        {
-            return Levels[currLevelId + 1];
-        }
-    }
 
     IEnumerator GameOverUiDelay()
     {
