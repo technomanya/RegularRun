@@ -19,7 +19,7 @@ public class PlayerImageController : MonoBehaviour
     private bool _isGameOver = false;
     private AudioSource[] audios;
 
-    public PlayerController PlayerController;
+    //public PlayerController PlayerController;
     public PlayerControllerWaypoint PlayerControllerWP;
     public GameManager GM;
     public float maxSpeed = 20.0f;
@@ -45,7 +45,7 @@ public class PlayerImageController : MonoBehaviour
         
         //JetObj = GameObject.FindGameObjectWithTag("Jet");
         //JetObj.SetActive(false);
-        PlayerController = GetComponentInParent<PlayerController>();
+
         GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (gameObject.GetComponentInParent<PlayerControllerWaypoint>())
         {
@@ -54,8 +54,7 @@ public class PlayerImageController : MonoBehaviour
         }
         else
         {
-            PlayerController = GetComponentInParent<PlayerController>();
-            boostSpeed = PlayerController.speed;
+            boostSpeed = 30;
         }
 
         foreach (var effectFX in GetComponentsInChildren<ParticleSystem>())

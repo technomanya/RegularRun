@@ -19,6 +19,7 @@ public class PlayerControllerWaypoint : MonoBehaviour
     public float mouseX = 0.0f;
     public Text speedText;
     public InputType InputT;
+    public bool begin;
 
     public enum InputType
     {
@@ -28,53 +29,68 @@ public class PlayerControllerWaypoint : MonoBehaviour
 
     void Awake()
     {
-        _wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-        foreach (var wp in _wayPoints)
-        {
-            wp.transform.SetParent(null);
-        }
+       
+        //foreach (var wp in _wayPoints)
+        //{
+        //    wp.transform.SetParent(null);
+        //}
 
-        _wayPoints.OrderBy(_wayPoints => _wayPoints.transform.position.z);
+        
     }
 
     void Start()
     {
+        _wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+        _wayPoints.OrderBy(_wayPoints => _wayPoints.transform.position.z);
+
         tempSpeed = PlayerSpeed;
         rb = GetComponent<Rigidbody>();
         _gridController = GetComponent<GridController>();
+        begin = false;
     }
 
     void Update()
     {
-
-        if (Vector3.Distance(_wayPoints[current].transform.position, transform.position) < 0.5 && Time.timeScale > 0)
+        if(begin)
         {
-            current++;
-            if (current >= _wayPoints.Length)
+            if (Vector3.Distance(_wayPoints[current].transform.position, transform.position) < 0.5 &&
+                Time.timeScale > 0)
             {
-                current = 0;
+                current++;
+                if (current >= _wayPoints.Length)
+                {
+                    current = 0;
+                }
+
             }
-            
+
+            MovePlayer(transform, _wayPoints[current].transform, PlayerSpeed);
         }
-        MovePlayer(transform, _wayPoints[current].transform, PlayerSpeed);
         InputControlWayPoint();
     }
 
     void MovePlayer(Transform _here, Transform _there, float speed)
     {
+        Debug.Log("Gittiği YER"+_there.name);
         transform.position = Vector3.MoveTowards(_here.position, _there.position,
            speed*Time.deltaTime);
-
-        //rb.velocity = Vector3.MoveTowards(_here.position, _there.position,
-        //    speed*Time.deltaTime);
-        //transform.position = Vector3.Slerp(_here.position, _there.position, speed * Time.deltaTime);
-        //Debug.Log("PlayerPosition= "+transform.position);
     }
 
     void InputControlWayPoint()
     {
         Vector2 touchDeltaPosition;
+        mouseX = Input.mousePosition.x;
 #if UNITY_ANDROID
+        if (Input.touchCount > 0 &&
+            Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+
+            // Get movement of the finger since last frame
+            touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+
+            mouseX = touchDeltaPosition.x;
+        }
+#elif UNITY_IOS
         if (Input.touchCount > 0 &&
             Input.GetTouch(0).phase == TouchPhase.Moved)
         {
@@ -86,8 +102,6 @@ public class PlayerControllerWaypoint : MonoBehaviour
         }
 
 #endif
-
-        mouseX = Input.mousePosition.x;
 
         if (Input.GetMouseButton(0))
         {
@@ -124,17 +138,18 @@ public class PlayerControllerWaypoint : MonoBehaviour
 
     public void PlayerControlBegin()
     {
-        if (_wayPoints.Length > 0)
-        {
-            _wayPoints = null;
-        }
-        _wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-        foreach (var wp in _wayPoints)
-        {
-            wp.transform.SetParent(null);
-        }
+        begin = true;
+        //if (_wayPoints.Length > 0)
+        //{
+        //    _wayPoints = null;
+        //}
+        //_wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+        //foreach (var wp in _wayPoints)
+        //{
+        //    wp.transform.SetParent(null);
+        //}
 
-        _wayPoints.OrderBy(_wayPoints => _wayPoints.transform.position.z);
+        //_wayPoints.OrderBy(_wayPoints => _wayPoints.transform.position.z);
     }
 
     private void OnTriggerEnter(Collider other)
