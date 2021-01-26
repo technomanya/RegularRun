@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RaceRunMat
-  m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
-  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT
+  m_Shader: {fileID: 4800000, guid: dd496457a855aa341b0d7b7b475a7a3a, type: 3}
+  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -80,7 +80,7 @@ Material:
     - _OcclusionStrength: 1
     - _Offset1: 0
     - _Offset2: 0
-    - _Outline: 1
+    - _Outline: 0.72
     - _Parallax: 0.02
     - _RampSmooth: 0.326
     - _RampSmoothAdd: 1
@@ -110,7 +110,7 @@ Material:
     - _Color: {r: 0.7830189, g: 0.7206079, b: 0.09233712, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _OutlineColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _RimColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0.6}
     - _SColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
