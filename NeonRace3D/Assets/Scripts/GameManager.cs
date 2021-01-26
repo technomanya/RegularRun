@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
 
         gridList = GameObject.FindGameObjectsWithTag("Grid");
-        if (SceneManager.GetActiveScene().name == "SceneMaker")
+        if (SceneManager.GetActiveScene().name == "SceneMaker" /*|| true*/)
         {
             finishLine = GameObject.FindGameObjectWithTag("Finish");
             GameObject beforeGrid = new GameObject();
