@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverObj;
     public Text CoinText;
     public Text ScoreText;
+    public Text IngameScoreText;
     [SerializeField] private Image youWin;
     [SerializeField] private Image youLose;
     [Space(20)]
@@ -286,6 +287,7 @@ public class GameManager : MonoBehaviour
         {
             case PointSystem.PositivePoint:
                 _positivePoint += points;
+                IngameScoreText.text = "X" + _positivePoint.ToString();
                 break;
             case PointSystem.NegativePoint:
                 _negativePoint += points;
