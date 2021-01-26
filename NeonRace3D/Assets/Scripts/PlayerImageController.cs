@@ -164,64 +164,6 @@ public class PlayerImageController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.transform.parent.CompareTag("Obstacle") )
-        //{
-
-        //    if(sprintBegin == 0 && slowBegin == 0)
-        //    {
-        //        //Debug.Log("ObstacleHit");
-        //        slowBegin = Time.timeSinceLevelLoad;
-        //        //PlayerControllerWP.PlayerSpeed = minSpeed;
-        //        //if (speed >= minSpeed)
-        //        //{
-        //        //    speed -= speed * 0.3f;
-        //        //    PlayerControllerWP.PlayerSpeed = minSpeed;
-        //        //}
-        //        //Destroy(other.gameObject);
-        //        other.gameObject.GetComponent<Renderer>().enabled = false;
-        //        obstacleFX.Play();
-        //        audios[0].Play();
-        //        gridCon.tronRunning.SetTrigger("Stumble");
-        //    }
-
-        //    GM.PointAddByType(GameManager.PointSystem.NegativePoint, 5);
-        //    //gameObject.GetComponent<GridController>().speed -= gameObject.GetComponent<GridController>().speed * 0.2f;
-        //}
-        //else if (other.transform.parent.CompareTag("Power"))
-        //{
-        //    //Debug.Log("PowerHit");
-        //    if(sprintBegin == 0 )
-        //    {
-        //        if (powerCounter < 4)
-        //        {
-        //            powerCounter++;
-        //        }
-        //        else
-        //        {
-        //            powerCounter = 0;
-        //        }
-
-        //        //if (speed <= maxSpeed)
-        //        //{
-        //        //    speed += speed;
-        //        //    PlayerControllerWP.PlayerSpeed = speed;
-        //        //}
-        //        //Destroy(other.gameObject);
-        //        other.gameObject.GetComponent<Renderer>().enabled = false;
-        //        powerFX.Play();
-        //        audios[1].Play();
-        //        gridCon.tronRunning.SetTrigger("Sprint");
-        //    }
-
-        //    GM.PointAddByType(GameManager.PointSystem.PositivePoint, 10);
-        //    //gameObject.GetComponent<GridController>().speed *= 2;
-        //}
-
-        //if (other.transform.CompareTag("CoinObj"))
-        //{
-        //    GM.RealCoins++;
-        //    other.GetComponent<Renderer>().enabled = false;
-        //}
         if (other.transform.CompareTag("PowerObj"))
         {
             powerFX.Play();
@@ -389,11 +331,15 @@ public class PlayerImageController : MonoBehaviour
             }
             else
             {
+                ShieldMain.SetActive(true);
                 animPlayer = GetComponentsInChildren<Animator>();
+                //animPlayer = ShieldMain.GetComponentsInChildren<Animator>();
                 foreach (var anim in animPlayer)
                 {
-                    anim.SetInteger("DanceMode", 1);
+                    anim.SetBool("GameOver", true);
                 }
+
+                MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
                 GM.GameOver("LOSE");
             }
         }
