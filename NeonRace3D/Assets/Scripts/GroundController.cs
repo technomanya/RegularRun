@@ -25,16 +25,4 @@ public class GroundController : MonoBehaviour
             _rendererSelf.material.Lerp(_matGroundSelf, _matGround, Time.deltaTime*playerSpeed);
         }
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if(other.gameObject.GetComponent<PlayerController>())
-            {
-                playerSpeed = other.gameObject.GetComponent<PlayerController>().speed;
-            }
-            _colorChange = true;
-        }
-    }
 }

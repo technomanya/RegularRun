@@ -17,7 +17,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
     private bool _isGameOver = false;
     private AudioSource[] audios;
 
-    public PlayerController PlayerController;
+
     public PlayerControllerWaypoint PlayerControllerWP;
     public GameManager GM;
     public float maxSpeed = 20.0f;
@@ -54,7 +54,6 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
         //JetObj = GameObject.FindGameObjectWithTag("Jet");
         //JetObj.SetActive(false);
-        PlayerController = GetComponentInParent<PlayerController>();
         GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (gameObject.GetComponentInParent<PlayerControllerWaypoint>())
         {
@@ -63,8 +62,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
         }
         else
         {
-            PlayerController = GetComponentInParent<PlayerController>();
-            boostSpeed = PlayerController.speed;
+            boostSpeed = 30;
         }
 
         foreach (var effectFX in GetComponentsInChildren<ParticleSystem>())
@@ -149,26 +147,6 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
             }
         }
 
-        switch (cameraMove)
-        {
-            case 1:
-                cameraMove = 0;
-                CameraEffect(Camera.main.transform.localPosition, new Vector3(0, 4.5f, -5.0f));
-                CharacterMove(gameObject.transform.localPosition, new Vector3(0, 3.0f, transform.localPosition.z));
-                gameObject.transform.localEulerAngles = new Vector3(60, 0, 0);
-                break;
-            case 2:
-
-                cameraMove = 0;
-                //gameObject.transform.localPosition = new Vector3(0, 1.5f, transform.localPosition.z);
-                //Camera.main.transform.localPosition = new Vector3(0, 3.0f, -5.0f);
-                CameraEffect(Camera.main.transform.localPosition, new Vector3(0, 3.0f, -5.0f));
-                CharacterMove(gameObject.transform.localPosition, new Vector3(0, 1.5f, transform.localPosition.z));
-                gameObject.transform.localEulerAngles = Vector3.zero;
-                break;
-        }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -212,34 +190,6 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
         }
     }
 
-    void CameraEffect(Vector3 startPos, Vector3 endPos)
-    {
-        StartCoroutine(TranslateOverTime(Camera.main.transform, startPos, endPos, 0.1f));
-    }
-
-    void CharacterMove(Vector3 startPos, Vector3 endPos)
-    {
-        StartCoroutine(TranslateOverTime(gameObject.transform, startPos, endPos, 0.1f));
-    }
-
-    IEnumerator TranslateOverTime(Transform movingHandle, Vector3 originalPosition, Vector3 finalPosition, float duration)
-    {
-        if (duration > 0f)
-        {
-            float startTime = Time.time;
-            float endTime = startTime + duration;
-            movingHandle.localPosition = originalPosition;
-            yield return null;
-            while (Time.time < endTime)
-            {
-                float progress = (Time.time - startTime) / duration;
-                // progress will equal 0 at startTime, 1 at endTime.
-                movingHandle.localPosition = Vector3.Slerp(originalPosition, finalPosition, progress);
-                yield return null;
-            }
-        }
-        movingHandle.localPosition = finalPosition;
-    }
 
     void MakeStack(bool cond)
     {

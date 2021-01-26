@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
         if (_isLevelBegin == false)
         {
             float mouseXdif = playerControllerWP.mouseX;
-            if (Input.GetMouseButton(0) && mouseXdif == 0.0f)
+            if (Input.GetMouseButton(0) && mouseXdif != 0.0f)
             {
                 Begin();
                 StartImage.SetActive(false);
