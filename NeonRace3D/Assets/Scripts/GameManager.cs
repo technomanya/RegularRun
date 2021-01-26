@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int gridCount;
     public GameObject ControlButtons;
-    [Space(20)]
+    [Space(10)]
 
     [Header("Game UI Objects")]
     public GameObject StartImage;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public Text IngameScoreText;
     [SerializeField] private Image youWin;
     [SerializeField] private Image youLose;
-    [Space(20)]
+    [Space(10)]
 
     [Header("Game Attributes")]
     [SerializeField] private AudioSource audioSource;
@@ -36,24 +36,24 @@ public class GameManager : MonoBehaviour
     public int RealCoins = 0;
     public int CoinGeneral;
     private bool _isLevelBegin = false;
+    [Space(10)]
 
     [Header("Player Attributes")]
     public PlayerControllerWaypoint playerControllerWP;
-    //public FakePlayerController rivalController;
     private float tempSpeedPlayer;
-    //private float tempSpeedRival;
     private Vector3 _playerPosStart;
-    //private Vector3 _fakePlayerPosStart;
     private Quaternion _playerRotStart;
-    //private Quaternion _fakePlayerRotStart;
     public GameObject _player;
 
+    [Header("Objects in Grid")]
 
+    public GameObject[] obstacles;
+    public GameObject[] powers;
 
     public enum  SceneIndexConstant
     {
         MainScene = 0,
-        AllSidedScene = 1,
+        GameScene = 1,
         FourSidedScene = 2
         
     }

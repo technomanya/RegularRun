@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GlassBreakBehaviour : MonoBehaviour
 {
-    [SerializeField]private List<GameObject> glassParts;
+    [SerializeField]private Rigidbody[] glassParts;
     // Start is called before the first frame update
     void Start()
     {
+        glassParts = GetComponentsInChildren<Rigidbody>();
         foreach (var part in glassParts)
         {
             //if(part.activeInHierarchy)
@@ -37,7 +38,7 @@ public class GlassBreakBehaviour : MonoBehaviour
             foreach (var part in glassParts)
             {
                 part.transform.parent = null;
-                part.GetComponent<Rigidbody>().isKinematic = false;
+                part.isKinematic = false;
             }
 
             //gameObject.GetComponent<MeshRenderer>().enabled = false;
