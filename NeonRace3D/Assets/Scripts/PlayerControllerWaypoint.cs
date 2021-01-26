@@ -40,8 +40,8 @@ public class PlayerControllerWaypoint : MonoBehaviour
 
     void Start()
     {
-        _wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-        _wayPoints = _wayPoints.OrderBy(wp => wp.transform.position.z).ToArray();
+        //_wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+        //_wayPoints = _wayPoints.OrderBy(wp => wp.transform.position.z).ToArray();
 
         tempSpeed = PlayerSpeed;
         rb = GetComponent<Rigidbody>();
