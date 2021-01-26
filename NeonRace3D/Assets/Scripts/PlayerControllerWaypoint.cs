@@ -41,7 +41,7 @@ public class PlayerControllerWaypoint : MonoBehaviour
     void Start()
     {
         _wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-        _wayPoints.OrderBy(_wayPoints => _wayPoints.transform.position.z);
+        _wayPoints = _wayPoints.OrderBy(wp => wp.transform.position.z).ToArray();
 
         tempSpeed = PlayerSpeed;
         rb = GetComponent<Rigidbody>();
@@ -53,9 +53,11 @@ public class PlayerControllerWaypoint : MonoBehaviour
     {
         if(begin)
         {
-            if (Vector3.Distance(_wayPoints[current].transform.position, transform.position) < 0.5 &&
+            if (Vector3.Distance(_wayPoints[current].transform.position, transform.position) < 0.1 &&
                 Time.timeScale > 0)
             {
+
+                Debug.Log("Gittiği YER" + _wayPoints[current].name);
                 current++;
                 if (current >= _wayPoints.Length)
                 {
@@ -71,7 +73,6 @@ public class PlayerControllerWaypoint : MonoBehaviour
 
     void MovePlayer(Transform _here, Transform _there, float speed)
     {
-        Debug.Log("Gittiği YER"+_there.name);
         transform.position = Vector3.MoveTowards(_here.position, _there.position,
            speed*Time.deltaTime);
     }
