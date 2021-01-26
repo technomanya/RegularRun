@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: 4d72081c398a58243be8a7305f3618e7
+<<<<<<< HEAD:NeonRace3D/Assets/DynamicFog/Builtin/DynamicFog_Builtin.unitypackage.meta
+guid: 2f2c8f2754ebf443ca983db3e3250d92
+=======
+guid: 5e3b96ad0915f4ad5828cc3ffdd2878a
 folderAsset: yes
+>>>>>>> cf83345a1c6a05787287437c1df8cd1900f96b92:NeonRace3D/Assets/Effects/Epic Toon FX/Upgrade.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
