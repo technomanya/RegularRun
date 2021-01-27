@@ -92,40 +92,44 @@ public class GameManager : MonoBehaviour
                 {
                     //beforeGrid = Instantiate(grid, beforeGrid.transform.Find("EndTip").position, Quaternion.Euler(new Vector3(randomAngle, 0, 0)));
                     beforeGrid = Instantiate(grid, beforeGrid.transform.Find("EndTip").position, beforeGrid.transform.rotation);
-                    switch (randomAngleEnum)
-                    {
-                        case 0:
-                            randomAngle = 30f;
-                            break;
-                        case 1:
-                            randomAngle = 45f;
-                            break;
-                        case 2:
-                            randomAngle = 60f;
-                            break;
-                        case 3:
-                            randomAngle = 75f;
-                            break;
-                        case 4:
-                            randomAngle = -30f;
-                            break;
-                        case 5:
-                            randomAngle = -45f;
-                            break;
-                        case 6:
-                            randomAngle = -60f;
-                            break;
-                        case 7:
-                            randomAngle = -75f;
-                            break;
-                    }
+                    
                     if (randomAxis == 0)
                     {
                         beforeGrid.transform.Rotate(Vector3.up, randomAngle);
+                        switch (randomAngleEnum)
+                        {
+                            case 0:
+                                randomAngle = 30f;
+                                break;
+                            case 1:
+                                randomAngle = 45f;
+                                break;
+                            case 2:
+                                randomAngle = -30f;
+                                break;
+                            case 3:
+                                randomAngle = -45f;
+                                break;
+                        }
                     }
                     else
                     {
                         beforeGrid.transform.Rotate(Vector3.right, randomAngle);
+                        switch (randomAngleEnum)
+                        {
+                            case 0:
+                                randomAngle = 30f;
+                                break;
+                            case 1:
+                                randomAngle = 45f;
+                                break;
+                            case 2:
+                                randomAngle = -30f;
+                                break;
+                            case 3:
+                                randomAngle = -45f;
+                                break;
+                        }
                     }
                 }
                 beforeGrid.SetActive(true);
