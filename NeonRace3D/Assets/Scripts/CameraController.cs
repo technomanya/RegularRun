@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        //Castle = GameObject.FindGameObjectWithTag("Finish").transform;
         list[0] = list[list.Count - 1];
         foreach (var item in list)
         {

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -11,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject grid;
     public GameObject finishLine;
     public GameObject[] gridList;
+    public List<GameObject> waypointAll = new List<GameObject>();
+    [SerializeField]private GameObject[] waypointGrid;
     [SerializeField] private GridController Gcontroller;
 
     [SerializeField] private int gridCount;
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Text IngameScoreText;
     [SerializeField] private Image youWin;
     [SerializeField] private Image youLose;
+    [SerializeField] private Text levelName;
     [Space(10)]
 
     [Header("Game Attributes")]
@@ -45,10 +50,44 @@ public class GameManager : MonoBehaviour
     private Quaternion _playerRotStart;
     public GameObject _player;
 
-    [Header("Objects in Grid")]
+    [Header("Level Attributes")]
+    public List<Level> Levels = new List<Level>();
+    
+    public Level currLevel = new Level();
+    [SerializeField] private int levelCountAll = 50;
+    
+    public class Level
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public int GridCount { get; set; }
 
-    public GameObject[] obstacles;
-    public GameObject[] powers;
+        public Level LevelMaker(string name, int id)
+        {
+            
+            Name = name;
+            Id = id;
+            switch (id)
+            {
+                case int n when n >= 0 && n < 5:
+                    GridCount = 3;
+                    break;
+                case int n when n >= 5 && n < 10:
+                    GridCount = 4;
+                    break;
+                case int n when n >= 10 && n < 20:
+                    GridCount = 5;
+                    break;
+                case int n when n >= 20 && n < 30:
+                    GridCount = 6;
+                    break;
+                case int n when n >= 30 /*&& n < 5*/:
+                    GridCount = 7;
+                    break;
+            }
+            return this;
+        }
+    }
 
     public enum  SceneIndexConstant
     {
@@ -70,12 +109,31 @@ public class GameManager : MonoBehaviour
         //CoinText.gameObject.transform.parent.gameObject.SetActive(false);
         Time.timeScale = 0;
 
+        for (int i = 0; i < levelCountAll; i++)
+        {
+            Level tLevel = new Level();
+
+            tLevel.LevelMaker("Level " + (i + 1), i);
+            Levels.Add(tLevel);
+        }
+
+        if (PlayerPrefs.HasKey("SavedLevel"))
+        {
+            currLevel = Levels[PlayerPrefs.GetInt("SavedLevel")];
+        }
+        else
+        {
+            currLevel = Levels[0];
+        }
 
         gridList = GameObject.FindGameObjectsWithTag("Grid");
-        if (SceneManager.GetActiveScene().name == "SceneMaker" /*|| true*/)
+        GameObject beforeGrid = new GameObject();
+        beforeGrid = gridList[0];
+        if (SceneManager.GetActiveScene().name == "SceneMaker" || true)
         {
             finishLine = GameObject.FindGameObjectWithTag("Finish");
-            GameObject beforeGrid = new GameObject();
+            finishLine.SetActive(false);
+            
             float randomAngle = 0f;
             int randomAngleEnum = 0;
             int randomAxis = 0;
@@ -83,56 +141,57 @@ public class GameManager : MonoBehaviour
             {
                 randomAngleEnum = Random.Range(0, 8);
                 randomAxis = Random.Range(0, 2);
-                if (i == 0)
+                beforeGrid = Instantiate(grid, beforeGrid.transform.Find("EndTip").position, Quaternion.identity);
+
+                if (randomAxis == 0)
                 {
-                    beforeGrid = Instantiate(grid, Vector3.zero, Quaternion.identity);
-                    beforeGrid.GetComponentInChildren<SphereCollider>().enabled = false;
+                    switch (randomAngleEnum)
+                    {
+                        case 0:
+                            randomAngle = 30f;
+                            break;
+                        case 1:
+                            randomAngle = 15f;
+                            break;
+                        case 2:
+                            randomAngle = -30f;
+                            break;
+                        case 3:
+                            randomAngle = -15f;
+                            break;
+                    }
+                    beforeGrid.transform.Rotate(Vector3.up, randomAngle);
                 }
                 else
                 {
-                    //beforeGrid = Instantiate(grid, beforeGrid.transform.Find("EndTip").position, Quaternion.Euler(new Vector3(randomAngle, 0, 0)));
-                    beforeGrid = Instantiate(grid, beforeGrid.transform.Find("EndTip").position, beforeGrid.transform.rotation);
-                    
-                    if (randomAxis == 0)
+                    switch (randomAngleEnum)
                     {
-                        beforeGrid.transform.Rotate(Vector3.up, randomAngle);
-                        switch (randomAngleEnum)
-                        {
-                            case 0:
-                                randomAngle = 30f;
-                                break;
-                            case 1:
-                                randomAngle = 45f;
-                                break;
-                            case 2:
-                                randomAngle = -30f;
-                                break;
-                            case 3:
-                                randomAngle = -45f;
-                                break;
-                        }
+                        case 0:
+                            randomAngle = 15f;
+                            break;
+                        case 1:
+                            randomAngle = 30f;
+                            break;
+                        case 2:
+                            randomAngle = -30f;
+                            break;
+                        case 3:
+                            randomAngle = -15f;
+                            break;
                     }
-                    else
-                    {
-                        beforeGrid.transform.Rotate(Vector3.right, randomAngle);
-                        switch (randomAngleEnum)
-                        {
-                            case 0:
-                                randomAngle = 30f;
-                                break;
-                            case 1:
-                                randomAngle = 45f;
-                                break;
-                            case 2:
-                                randomAngle = -30f;
-                                break;
-                            case 3:
-                                randomAngle = -45f;
-                                break;
-                        }
-                    }
+                    beforeGrid.transform.Rotate(Vector3.right, randomAngle);
                 }
+                
                 beforeGrid.SetActive(true);
+                waypointGrid = GameObject.FindGameObjectsWithTag("WayPoint");
+                waypointGrid = waypointGrid.OrderBy(wp => wp.transform.localPosition.z).ToArray();
+                foreach (var item in waypointGrid)
+                {
+                    if(item.transform.parent == beforeGrid.transform)
+                        waypointAll.Add(item);
+                }
+                int randCase = Random.Range(0,3);
+                GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, true, beforeGrid.transform);
             }
             gridList = GameObject.FindGameObjectsWithTag("Grid");
             foreach (var grid in gridList)
@@ -140,8 +199,12 @@ public class GameManager : MonoBehaviour
                 grid.transform.eulerAngles = new Vector3(grid.transform.eulerAngles.x, grid.transform.eulerAngles.y, 0);
             }
 
-            finishLine.transform.position = gridList[gridList.Length - 1].transform.Find("EndTip").position;
-            finishLine.transform.rotation = gridList[gridList.Length - 1].transform.rotation;
+            var exp = gridList[gridList.Length - 1].transform.Find("EndTip");
+            finishLine.transform.parent = exp;
+            finishLine.transform.localPosition = Vector3.zero;
+            finishLine.transform.localRotation = Quaternion.Euler(0,180,0) ;
+            finishLine.SetActive(true);
+            playerControllerWP._wayPoints = waypointAll;
         }
         //GameOverObj.gameObject.transform.parent.gameObject.SetActive(false);
         //GameAnalyticsSDK.GameAnalytics.Initialize();
@@ -150,6 +213,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        levelName.text = currLevel.Name;
         if (PlayerPrefs.HasKey("Coin"))
         {
             CoinGeneral = PlayerPrefs.GetInt("Coin");
@@ -225,6 +289,7 @@ public class GameManager : MonoBehaviour
         CoinText.text = CoinGeneral.ToString();
         ScoreText.text = score.ToString();
         PlayerPrefs.SetInt("Coin",CoinGeneral);
+        PlayerPrefs.SetInt("SavedLevel", currLevel.Id + 1);
 
         
         //CoinText.gameObject.transform.parent.gameObject.SetActive(true);

@@ -13,13 +13,15 @@ public class PlayerControllerWaypoint : MonoBehaviour
     private float tempSpeed;
     private Rigidbody rb;
 
-    public GameObject[] _wayPoints;
+    public List<GameObject> _wayPoints = new List<GameObject>();
     public float PlayerSpeed;
     public float frequency = 1.0f;
     public float mouseX = 0.0f;
     public Text speedText;
     public InputType InputT;
     public bool begin;
+
+    [SerializeField] private float rotDuration;
 
     public enum InputType
     {
@@ -40,8 +42,6 @@ public class PlayerControllerWaypoint : MonoBehaviour
 
     void Start()
     {
-        //_wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-        //_wayPoints = _wayPoints.OrderBy(wp => wp.transform.position.z).ToArray();
 
         tempSpeed = PlayerSpeed;
         rb = GetComponent<Rigidbody>();
@@ -59,7 +59,7 @@ public class PlayerControllerWaypoint : MonoBehaviour
 
                 Debug.Log("Gittiği YER" + _wayPoints[current].name);
                 current++;
-                if (current >= _wayPoints.Length)
+                if (current >= _wayPoints.Count)
                 {
                     current = 0;
                 }
@@ -158,7 +158,7 @@ public class PlayerControllerWaypoint : MonoBehaviour
         //Debug.Log("Collide");
         if (other.transform.CompareTag("StartTip") && other.GetType() == typeof(SphereCollider))
         {
-            StartCoroutine(RotateOverTime(gameObject.transform, gameObject.transform.rotation, Quaternion.Euler(other.transform.parent.eulerAngles.x, other.transform.parent.eulerAngles.y, gameObject.transform.eulerAngles.z), 2 / PlayerSpeed));
+            StartCoroutine(RotateOverTime(gameObject.transform, gameObject.transform.rotation, Quaternion.Euler(other.transform.parent.eulerAngles.x, other.transform.parent.eulerAngles.y, gameObject.transform.eulerAngles.z), rotDuration));
             //camControl.CameraEffect();
         }
 
