@@ -186,7 +186,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
         else if (col.transform.CompareTag("FinalTrigger"))
         {
             MainCamera.gameObject.GetComponentInParent<CameraController>().CameraEffect();
-            PlayerControllerWP.PlayerSpeed = 15.0f;
+            PlayerControllerWP.PlayerSpeed = 25.0f;
         }
     }
 

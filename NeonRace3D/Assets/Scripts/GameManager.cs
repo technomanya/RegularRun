@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> waypointAll = new List<GameObject>();
     [SerializeField]private GameObject[] waypointGrid;
     [SerializeField] private GridController Gcontroller;
+    public GameObject[] finalWP;
 
     [SerializeField] private int gridCount;
     public GameObject ControlButtons;
@@ -31,9 +32,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image youWin;
     [SerializeField] private Image youLose;
     [SerializeField] private Text levelName;
-    [Space(10)]
 
-    [Header("Game Attributes")]
+    [Space(10)] [Header("Game Attributes")]
+    [SerializeField] private bool deleteSave = false;
+    [SerializeField] private bool SceneMaker = true;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private int _positivePoint = 0;
     [SerializeField] private int _negativePoint = 0;
@@ -129,17 +131,17 @@ public class GameManager : MonoBehaviour
         gridList = GameObject.FindGameObjectsWithTag("Grid");
         GameObject beforeGrid = new GameObject();
         beforeGrid = gridList[0];
-        if (SceneManager.GetActiveScene().name == "SceneMaker" || true)
+        if (SceneMaker)
         {
             finishLine = GameObject.FindGameObjectWithTag("Finish");
-            finishLine.SetActive(false);
+            //finishLine.SetActive(false);
             
             float randomAngle = 0f;
             int randomAngleEnum = 0;
             int randomAxis = 0;
             for (int i = 0; i < gridCount; i++)
             {
-                randomAngleEnum = Random.Range(0, 8);
+                randomAngleEnum = Random.Range(0, 4);
                 randomAxis = Random.Range(0, 2);
                 beforeGrid = Instantiate(grid, beforeGrid.transform.Find("EndTip").position, Quaternion.identity);
 
@@ -198,12 +200,19 @@ public class GameManager : MonoBehaviour
             {
                 grid.transform.eulerAngles = new Vector3(grid.transform.eulerAngles.x, grid.transform.eulerAngles.y, 0);
             }
+       
+            finalWP = finalWP.OrderBy(wp => wp.transform.localPosition.z).ToArray();
+            foreach (var item in finalWP)
+            {
+                waypointAll.Add(item);
+            }
 
             var exp = gridList[gridList.Length - 1].transform.Find("EndTip");
             finishLine.transform.parent = exp;
             finishLine.transform.localPosition = Vector3.zero;
             finishLine.transform.localRotation = Quaternion.Euler(0,180,0) ;
-            finishLine.SetActive(true);
+            
+            //finishLine.SetActive(true);
             playerControllerWP._wayPoints = waypointAll;
         }
         //GameOverObj.gameObject.transform.parent.gameObject.SetActive(false);
@@ -213,6 +222,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if(deleteSave)
+            PlayerPrefs.DeleteAll();
         levelName.text = currLevel.Name;
         if (PlayerPrefs.HasKey("Coin"))
         {
@@ -253,6 +264,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(string playerName)
     {
+        Gcontroller._canTurn = false;
         //Time.timeScale = 0;
         playerControllerWP.PlayerSpeed = 0;
         _player.GetComponent<SphereCollider>().enabled = false;
@@ -265,7 +277,7 @@ public class GameManager : MonoBehaviour
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
 
-
+            PlayerPrefs.SetInt("SavedLevel", currLevel.Id + 1);
             foreach (var anim in animS)
             {
                 anim.SetInteger("DanceMode", 1);
@@ -289,7 +301,7 @@ public class GameManager : MonoBehaviour
         CoinText.text = CoinGeneral.ToString();
         ScoreText.text = score.ToString();
         PlayerPrefs.SetInt("Coin",CoinGeneral);
-        PlayerPrefs.SetInt("SavedLevel", currLevel.Id + 1);
+        
 
         
         //CoinText.gameObject.transform.parent.gameObject.SetActive(true);
