@@ -131,6 +131,8 @@ public class GameManager : MonoBehaviour
         gridList = GameObject.FindGameObjectsWithTag("Grid");
         GameObject beforeGrid = new GameObject();
         beforeGrid = gridList[0];
+        int randCase = Random.Range(0, 3);
+        GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, true, beforeGrid.transform);
         if (SceneMaker)
         {
             finishLine = GameObject.FindGameObjectWithTag("Finish");
@@ -192,7 +194,7 @@ public class GameManager : MonoBehaviour
                     if(item.transform.parent == beforeGrid.transform)
                         waypointAll.Add(item);
                 }
-                int randCase = Random.Range(0,3);
+                randCase = Random.Range(0,3);
                 GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, true, beforeGrid.transform);
             }
             gridList = GameObject.FindGameObjectsWithTag("Grid");
