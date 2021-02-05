@@ -95,29 +95,16 @@ public class GridController : MonoBehaviour
         {
             if(mousePosX > 0)
             {
-                //tronRunning.SetTrigger("RightTurn");
                 gameObject.transform.Rotate(Vector3.forward, allSideRotAngle * -1 * Time.deltaTime);
-                //if(GameObject.FindGameObjectWithTag("Animator"))
-                //{
-
-                //    GameObject.FindGameObjectWithTag("Animator").transform.localEulerAngles = Vector3.up*30;
-                //}
+                
             }
             else if(mousePosX < 0)
             {
-                //tronRunning.SetTrigger("LeftTurn");
                 gameObject.transform.Rotate(Vector3.forward, allSideRotAngle * 1 * Time.deltaTime);
-                //if (GameObject.FindGameObjectWithTag("Animator"))
-                //{
-
-                //    GameObject.FindGameObjectWithTag("Animator").transform.localEulerAngles = Vector3.up * -30;
-                //}
+                
             }
             else
             {
-                //tronRunning.ResetTrigger("RightTurn");
-                //tronRunning.ResetTrigger("LeftTurn");
-                //tronRunning.SetTrigger("RunIdle");
                 gameObject.transform.Rotate(Vector3.forward, 0.0f);
             }
         }
