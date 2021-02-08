@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:NeonRace3D/Assets/Scripts/VolumetricFog/Extra/DynamicFog/Demos/Demos.unitypackage.meta
 guid: 60f0c8ab79a934ee6b04d580df71f9d1
 DefaultImporter:
+=======
+guid: 4ff52ace7f88de44399ecc881db236b4
+PrefabImporter:
+>>>>>>> 41c1a16fbd4c1ad678969a58330ce6fc3c17b796:NeonRace3D/Assets/Prefabs/ObsAndPow/Obstacles_180_10.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

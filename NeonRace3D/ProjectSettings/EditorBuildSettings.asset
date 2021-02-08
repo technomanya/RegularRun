@@ -5,33 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MainScene.unity
-    guid: 493225787b54a084fa42ac8a4cdba31a
-  - enabled: 0
-    path: Assets/Scenes/FourSidedScene.unity
-    guid: 4659f27bf38c0bd4b8ac110e018c475a
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/SceneMaker.unity
-    guid: 58d6816642e8d24408c882a2b133edcc
-  - enabled: 0
-    path: Assets/Scenes/GameScene.unity
-    guid: a66e8b4e893d50649a08bf18cd15465c
-  - enabled: 0
-    path: Assets/Scenes/GameScene 2.unity
-    guid: a269dc550e4abd84b85986f73c154107
   - enabled: 1
     path: Assets/Scenes/GameSceneCiftAdam.unity
     guid: 3007105706278d747a92a2eebcdbacc6

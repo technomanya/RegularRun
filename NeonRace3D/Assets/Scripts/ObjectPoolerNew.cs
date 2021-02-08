@@ -1,56 +1,114 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObjectPoolerNew : MonoBehaviour
 {
-    public GameObject poolObj;
-    public float distanceMin;
-    public float distanceMax;
-    public PlayerControllerWaypoint playerContWP;
+    [Header("Objects in Grid")]
+    public GameObject[] ObstaclesX5;
+    public GameObject[] ObstaclesX10;
+    public GameObject[] ObstaclesX15;
+    public GameObject[] PowersX5;
+    public GameObject[] PowersX10;
+    public GameObject[] PowersX15;
 
-    [SerializeField] private int objCount = 0;
-    [SerializeField] private List<GameObject> poolObjectsList = new List<GameObject>();
+    public ObjectType Type;
 
-    // Start is called before the first frame update
-    void Start()
+    public enum ObjectType
     {
-        playerContWP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControllerWaypoint>();
-
-        MakeObjects(poolObj);
+        Obj5 = 0,
+        Obj10 = 1,
+        Obj15 = 2
     }
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
 
     }
 
-    void MakeObjects(GameObject obj)
+    public void FillTheRoad(ObjectType type, bool power, Transform newParent)
     {
-        GameObject tempObj;
-        for (int i = 0; i < objCount; i++)
+        GameObject tempPow = new GameObject();
+        GameObject tempObs = new GameObject();
+
+        if (power)
         {
-            tempObj = Instantiate(obj, Vector3.zero, Quaternion.identity);
-            tempObj.transform.SetParent(gameObject.transform);
-            tempObj.SetActive(true);
-            poolObjectsList.Add(tempObj);
+            int angle = Random.Range(0, 2);
+            switch (type)
+            {
+                case ObjectType.Obj15:
+                    tempPow = Instantiate(PowersX15[0]);
+                    tempPow.transform.parent = newParent;
+                    tempPow.transform.localPosition = Vector3.zero;
+                    tempPow.transform.localRotation = Quaternion.identity;
+                    break;
+                case ObjectType.Obj10:
+                    tempPow = Instantiate(PowersX10[0]);
+                    tempPow.transform.parent = newParent;
+                    tempPow.transform.localPosition = Vector3.zero;
+                    tempPow.transform.localRotation = Quaternion.identity;
+
+                    tempObs = Instantiate(ObstaclesX5[angle]);
+                    tempObs.transform.parent = newParent;
+                    tempObs.transform.localPosition = Vector3.zero;
+                    tempObs.transform.localRotation = Quaternion.identity;
+                    break;
+                case ObjectType.Obj5:
+                    tempPow = Instantiate(PowersX5[0]);
+                    tempPow.transform.parent = newParent;
+                    tempPow.transform.localPosition = Vector3.zero;
+                    tempPow.transform.localRotation = Quaternion.identity;
+
+                    tempObs = Instantiate(ObstaclesX10[angle]);
+                    tempObs.transform.parent = newParent;
+                    tempObs.transform.localPosition = Vector3.zero;
+                    tempObs.transform.localRotation = Quaternion.identity;
+                    break;
+                default:
+                    break;
+            }
         }
-        MoveObjects(poolObjectsList);
-    }
-
-    void MoveObjects(List<GameObject> objList)
-    {
-        float rotZ = 0;
-
-        int posXYodds = 0;
-        for (int i = 0; i < objList.Count; i++)
+        else
         {
-            rotZ = Random.Range(0, 180);
-            objList[i].transform.position = playerContWP._wayPoints[i].transform.position;
-            objList[i].transform.rotation = Quaternion.identity;
-            objList[i].transform.localEulerAngles = new Vector3(0,0, 0);
-            //obj.transform.parent.rotation;
+            int angle = Random.Range(0, 2);
+            switch (type)
+            {
+                case ObjectType.Obj15:
+                    tempObs = Instantiate(ObstaclesX15[angle]);
+                    tempObs.transform.parent = newParent;
+                    tempObs.transform.localPosition = Vector3.zero;
+                    tempObs.transform.localRotation = Quaternion.identity;
+                    break;
+                case ObjectType.Obj10:
+                    tempObs = Instantiate(ObstaclesX10[angle]);
+                    tempObs.transform.parent = newParent;
+                    tempObs.transform.localPosition = Vector3.zero;
+                    tempObs.transform.localRotation = Quaternion.identity;
+
+                    tempPow = Instantiate(PowersX5[0]);
+                    tempPow.transform.parent = newParent;
+                    tempPow.transform.localPosition = Vector3.zero;
+                    tempPow.transform.localRotation = Quaternion.identity;
+                    break;
+                case ObjectType.Obj5:
+                    tempObs = Instantiate(ObstaclesX5[angle]);
+                    tempObs.transform.parent = newParent;
+                    tempObs.transform.localPosition = Vector3.zero;
+                    tempObs.transform.localRotation = Quaternion.identity;
+
+                    tempPow = Instantiate(PowersX10[0]);
+                    tempPow.transform.parent = newParent;
+                    tempPow.transform.localPosition = Vector3.zero;
+                    tempPow.transform.localRotation = Quaternion.identity;
+                    break;
+                default:
+                    break;
+            }
         }
+        tempPow.SetActive(true);
+        tempObs.SetActive(true);
     }
+
 }
