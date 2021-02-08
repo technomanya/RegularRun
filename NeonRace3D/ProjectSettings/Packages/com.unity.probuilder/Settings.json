@@ -55,7 +55,6 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-<<<<<<< HEAD
                 "key": "mesh.meshColliderIsConvex",
                 "value": "{\"m_Value\":false}"
             },
@@ -218,10 +217,6 @@
                 "type": "UnityEditor.ProBuilder.Actions.MirrorObjects+MirrorSettings, Unity.ProBuilder.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "MirrorObjects.mirrorAxes",
                 "value": "{\"m_Value\":1}"
-=======
-                "key": "editor.stripProBuilderScriptsOnBuild",
-                "value": "{\"m_Value\":true}"
->>>>>>> 41c1a16fbd4c1ad678969a58330ce6fc3c17b796
             }
         ]
     }
