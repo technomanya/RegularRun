@@ -24,10 +24,10 @@ public class CameraController : MonoBehaviour
 
         list[4] = 0;
 
-        foreach (var item in list)
-        {
-            Debug.Log(item);
-        }
+        //foreach (var item in list)
+        //{
+        //    Debug.Log(item);
+        //}
     }
 
     void Start()

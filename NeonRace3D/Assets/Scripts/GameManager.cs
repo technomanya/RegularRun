@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
                         waypointAll.Add(item);
                 }
                 randCase = Random.Range(0,3);
-                GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, true, beforeGrid.transform);
+                GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, false, beforeGrid.transform);
             }
             gridList = GameObject.FindGameObjectsWithTag("Grid");
             foreach (var grid in gridList)

@@ -86,6 +86,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
 
     void Update()
     {
+        RenderSettings.skybox.SetFloat("_Rotation", transform.root.eulerAngles.y);
         endCounterSec += Time.deltaTime;
         int seconds = (int)endCounterSec % 60;
         switch (powerCounter)

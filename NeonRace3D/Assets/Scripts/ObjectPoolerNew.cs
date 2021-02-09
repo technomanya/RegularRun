@@ -30,6 +30,8 @@ public class ObjectPoolerNew : MonoBehaviour
 
     public void FillTheRoad(ObjectType type, bool power, Transform newParent)
     {
+        Debug.Log("***Fillin Road***");
+
         GameObject tempPow = new GameObject();
         GameObject tempObs = new GameObject();
 
@@ -82,12 +84,12 @@ public class ObjectPoolerNew : MonoBehaviour
                     tempObs.transform.localRotation = Quaternion.identity;
                     break;
                 case ObjectType.Obj10:
-                    tempObs = Instantiate(ObstaclesX10[angle]);
+                    tempObs = Instantiate(ObstaclesX10[angle],newParent);
                     tempObs.transform.parent = newParent;
                     tempObs.transform.localPosition = Vector3.zero;
                     tempObs.transform.localRotation = Quaternion.identity;
 
-                    tempPow = Instantiate(PowersX5[0]);
+                    tempPow = Instantiate(PowersX5[0],newParent);
                     tempPow.transform.parent = newParent;
                     tempPow.transform.localPosition = Vector3.zero;
                     tempPow.transform.localRotation = Quaternion.identity;
