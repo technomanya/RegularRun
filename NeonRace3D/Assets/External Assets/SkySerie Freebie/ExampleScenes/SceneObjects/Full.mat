@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Full
-  m_Shader: {fileID: 4800000, guid: f8d49205b3b0a644195633020367689d, type: 3}
-  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT
+  m_Shader: {fileID: 4800000, guid: 70e19283e0f45cc41b48de36b262b1bf, type: 3}
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_RAMPTEXT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -39,6 +39,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveRamp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -60,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: abc83c21d57d4a74cabe12065fa1a8b2, type: 3}
+        m_Texture: {fileID: 2800000, guid: ccad9b0732473ee4e95de81e50e9050f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -68,6 +76,8 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DissolveGradientWidth: 0.2
+    - _DissolveValue: 0.5
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 1
@@ -75,13 +85,17 @@ Material:
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 0
+    - _Offset2: 0
+    - _Outline: 1.34
     - _Parallax: 0.02
     - _RampSmooth: 0.2
     - _RampSmoothAdd: 0.75
-    - _RampThreshold: 0.5
+    - _RampThreshold: 0.577
     - _RimMax: 0.85
     - _RimMin: 0.6
     - _RimStrength: 0.5
+    - _Shininess: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecBlend: 1
     - _SpecSmooth: 1
@@ -91,13 +105,18 @@ Material:
     - _TCP2_RAMPTEXT: 0
     - _TCP2_SPEC_TOON: 0
     - _TCP2_STYLIZED_FRESNEL: 0
+    - _TexLod: 5
     - _UVSec: 0
+    - _ZSmooth: -0.5
     - _ZWrite: 1
+    - __dummy__: 0
     m_Colors:
     - <noninit>: {r: 0, g: 9.2285995e-35, b: 0, a: 9.228563e-35}
-    - _Color: {r: 1, g: 0.47547168, b: 0.47547168, a: 0.78431374}
+    - _Color: {r: 1, g: 0.54707855, b: 0.4198113, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.42352945, g: 0.2627451, b: 0.227451, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+    - _SColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_BuildTextureStacks: []

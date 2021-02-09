@@ -88,7 +88,7 @@ Material:
     - _RampSmoothDir: 0.5
     - _RampSmoothPoint: 0.5
     - _RampSmoothSpot: 0.5
-    - _RampThreshold: 0.634
+    - _RampThreshold: 0.607
     - _RampThresholdDir: 0.5
     - _RampThresholdPoint: 0.5
     - _RampThresholdSpot: 0.5
@@ -97,7 +97,7 @@ Material:
     - _RimStrength: 0.5
     - _Shadow_HSV_H: 0
     - _Shadow_HSV_S: 0
-    - _Shadow_HSV_V: 0
+    - _Shadow_HSV_V: 0.056
     - _Shininess: 0.156
     - _SmoothnessTextureChannel: 0
     - _SpecBlend: 1
@@ -116,12 +116,12 @@ Material:
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.118948035, g: 0.7209784, b: 0.9339623, a: 1}
+    - _Color: {r: 1, g: 0.41037738, b: 0.5656213, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 0, g: 0.55555534, b: 1, a: 1}
+    - _HColor: {r: 1, g: 0.41176474, b: 0.5647059, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
     - _SpecColor: {r: 0.21782663, g: 0.5426085, b: 0.8396226, a: 1}
     - _VColorBlendOffset: {r: 0, g: 0, b: 0, a: 0}
     - _VColorBlendSmooth: {r: 0.25, g: 0.25, b: 0.25, a: 0.25}
