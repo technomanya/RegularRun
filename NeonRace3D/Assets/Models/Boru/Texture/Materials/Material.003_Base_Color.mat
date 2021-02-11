@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material.003_Base_Color
-  m_Shader: {fileID: 4800000, guid: 7cf6e0bd6774e2a438d4701ceb5e6bae, type: 3}
-  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_OUTLINE_CONST_SIZE TCP2_RAMPTEXT
-    TCP2_ZSMOOTH_ON
+  m_Shader: {fileID: 4800000, guid: a6da473b89caeb1409bac856668af764, type: 3}
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_OUTLINE_CONST_SIZE TCP2_SPEC
+    TCP2_ZSMOOTH_ON _ALPHABLEND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -49,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5c5e55a9fbc4aa64a92b1555198f8bb8, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,27 +68,31 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8af77daad29f8b34da56515f193158f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Mode: 0
+    - _Mode: 2
     - _OcclusionStrength: 1
     - _Offset1: 0
     - _Offset2: 0
     - _Outline: 0.26
     - _Parallax: 0.02
-    - _RampSmooth: 0.01
+    - _RampSmooth: 0.22
     - _RampSmoothAdd: 0.75
     - _RampSmoothDir: 0.5
     - _RampSmoothPoint: 0.5
     - _RampSmoothSpot: 0.5
-    - _RampThreshold: 0.607
+    - _RampThreshold: 0.126
     - _RampThresholdDir: 0.5
     - _RampThresholdPoint: 0.5
     - _RampThresholdSpot: 0.5
@@ -98,12 +102,12 @@ Material:
     - _Shadow_HSV_H: 0
     - _Shadow_HSV_S: 0
     - _Shadow_HSV_V: 0.056
-    - _Shininess: 0.156
+    - _Shininess: 0.01
     - _SmoothnessTextureChannel: 0
     - _SpecBlend: 1
     - _SpecSmooth: 1
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _TCP2_DISABLE_WRAPPED_LIGHT: 1
     - _TCP2_RAMPTEXT: 0
     - _TCP2_SPEC_TOON: 0
@@ -111,17 +115,17 @@ Material:
     - _TexLod: 5
     - _UVSec: 0
     - _ZSmooth: 0.16
-    - _ZWrite: 1
+    - _ZWrite: 0
     - __BeginGroup_OtherLights: 0
     - __EndGroup: 0
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.41037738, b: 0.5656213, a: 1}
+    - _Color: {r: 0.12842648, g: 0.16218732, b: 0.24528301, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 1, g: 0.41176474, b: 0.5647059, a: 1}
+    - _HColor: {r: 0.9056604, g: 0.13243146, b: 0.33475572, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+    - _SColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
     - _SpecColor: {r: 0.21782663, g: 0.5426085, b: 0.8396226, a: 1}
     - _VColorBlendOffset: {r: 0, g: 0, b: 0, a: 0}
     - _VColorBlendSmooth: {r: 0.25, g: 0.25, b: 0.25, a: 0.25}
