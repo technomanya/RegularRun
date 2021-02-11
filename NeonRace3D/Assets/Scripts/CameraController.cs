@@ -48,13 +48,13 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         if(effectOn)
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0,-60,0), Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(15,-60,0), Time.deltaTime * speed);
 
         if(effectGameOver)
         {
-            transform.localPosition =
-                Vector3.Slerp(transform.localPosition, new Vector3(0, -3, -7), Time.deltaTime * speed);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(-5, -180, 0),
+            Camera.main.transform.localPosition =
+                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,3 , -15), Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, -120, 0),
                 Time.deltaTime * speed);
         }
     }
@@ -69,13 +69,17 @@ public class CameraController : MonoBehaviour
 
     public void GameOverEffect()
     {
+        if (effectOn)
+            effectOn = false;
+
         effectGameOver = true;
     }
 
-    IEnumerator Reset()
+    IEnumerator Reset(Vector3 rPos, Quaternion rRot)
     {
         yield return new WaitForSeconds(2.0f);
         effectOn = false;
-        transform.localEulerAngles =new Vector3(0,-90,0);
+        Camera.main.transform.localPosition = rPos;
+        transform.localRotation = rRot;
     }
 }

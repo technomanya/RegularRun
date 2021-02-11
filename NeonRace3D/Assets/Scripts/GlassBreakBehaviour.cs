@@ -11,8 +11,8 @@ public class GlassBreakBehaviour : MonoBehaviour
         glassParts = GetComponentsInChildren<Rigidbody>();
         foreach (var part in glassParts)
         {
-            //if(part.activeInHierarchy)
-            //    part.SetActive(false);
+            if (!part.isKinematic)
+                part.isKinematic = true;
         }
     }
 

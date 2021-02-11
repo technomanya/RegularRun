@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         gridList = GameObject.FindGameObjectsWithTag("Grid");
         GameObject beforeGrid = new GameObject();
         beforeGrid = gridList[0];
-        int randCase = Random.Range(0, 3);
+        int randCase = Random.Range(0, 4);
         GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, true, beforeGrid.transform);
         if (SceneMaker)
         {
@@ -194,14 +194,14 @@ public class GameManager : MonoBehaviour
                     if(item.transform.parent == beforeGrid.transform)
                         waypointAll.Add(item);
                 }
-                randCase = Random.Range(0,3);
-                GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, false, beforeGrid.transform);
+                randCase = Random.Range(0,4);
+                GetComponent<ObjectPoolerNew>().FillTheRoad((ObjectPoolerNew.ObjectType)randCase, true, beforeGrid.transform);
             }
             gridList = GameObject.FindGameObjectsWithTag("Grid");
-            foreach (var grid in gridList)
-            {
-                grid.transform.eulerAngles = new Vector3(grid.transform.eulerAngles.x, grid.transform.eulerAngles.y, 0);
-            }
+            //foreach (var grid in gridList)
+            //{
+            //    grid.transform.eulerAngles = new Vector3(grid.transform.eulerAngles.x, grid.transform.eulerAngles.y, 0);
+            //}
        
             finalWP = finalWP.OrderBy(wp => wp.transform.localPosition.z).ToArray();
             foreach (var item in finalWP)
@@ -276,6 +276,7 @@ public class GameManager : MonoBehaviour
         var animS = _player.GetComponentInChildren<PlayerImageControllerCiftAdam>().animPlayer;
         if (playerName == "Player")
         {
+            Camera.main.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
 
