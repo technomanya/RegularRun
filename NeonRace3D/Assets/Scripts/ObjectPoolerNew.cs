@@ -43,7 +43,7 @@ public class ObjectPoolerNew : MonoBehaviour
 
                 var tempObs = Instantiate(ObstaclesX5[angleObs]);
                 tempObs.transform.parent = newParent;
-                tempObs.transform.localPosition = Vector3.zero + Vector3.forward * 70;
+                tempObs.transform.localPosition = Vector3.zero + Vector3.forward * 60;
                 tempObs.transform.localRotation = Quaternion.identity;
 
                 tempPow.SetActive(true);
@@ -57,7 +57,7 @@ public class ObjectPoolerNew : MonoBehaviour
 
                 tempObs = Instantiate(ObstaclesX10[angleObs]);
                 tempObs.transform.parent = newParent;
-                tempObs.transform.localPosition = Vector3.zero + Vector3.forward * 35;
+                tempObs.transform.localPosition = Vector3.zero + Vector3.forward * 25;
                 tempObs.transform.localRotation = Quaternion.identity;
 
                 tempPow.SetActive(true);

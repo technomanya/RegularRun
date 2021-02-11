@@ -139,24 +139,24 @@ public class PlayerImageController : MonoBehaviour
             }
         }
 
-        switch (cameraMove)
-        {
-            case 1:
-                cameraMove = 0;
-                CameraEffect(Camera.main.transform.localPosition, new Vector3(0, 4.5f, -5.0f));
-                CharacterMove(gameObject.transform.localPosition, new Vector3(0, 3.0f, transform.localPosition.z));
-                gameObject.transform.localEulerAngles = new Vector3(60, 0, 0);
-                break;
-            case 2:
+        //switch (cameraMove)
+        //{
+        //    case 1:
+        //        cameraMove = 0;
+        //        CameraEffect(Camera.main.transform.localPosition, new Vector3(0, 4.5f, -5.0f));
+        //        CharacterMove(gameObject.transform.localPosition, new Vector3(0, 3.0f, transform.localPosition.z));
+        //        gameObject.transform.localEulerAngles = new Vector3(60, 0, 0);
+        //        break;
+        //    case 2:
                 
-                cameraMove = 0;
-                //gameObject.transform.localPosition = new Vector3(0, 1.5f, transform.localPosition.z);
-                //Camera.main.transform.localPosition = new Vector3(0, 3.0f, -5.0f);
-                CameraEffect(Camera.main.transform.localPosition, new Vector3(0, 3.0f, -5.0f));
-                CharacterMove(gameObject.transform.localPosition, new Vector3(0, 1.5f, transform.localPosition.z));
-                gameObject.transform.localEulerAngles = Vector3.zero;
-                break;
-        }
+        //        cameraMove = 0;
+        //        //gameObject.transform.localPosition = new Vector3(0, 1.5f, transform.localPosition.z);
+        //        //Camera.main.transform.localPosition = new Vector3(0, 3.0f, -5.0f);
+        //        CameraEffect(Camera.main.transform.localPosition, new Vector3(0, 3.0f, -5.0f));
+        //        CharacterMove(gameObject.transform.localPosition, new Vector3(0, 1.5f, transform.localPosition.z));
+        //        gameObject.transform.localEulerAngles = Vector3.zero;
+        //        break;
+        //}
             
         
     }
@@ -202,10 +202,10 @@ public class PlayerImageController : MonoBehaviour
         }
     }
 
-    void CameraEffect(Vector3 startPos, Vector3 endPos)
-    {
-        StartCoroutine(TranslateOverTime(Camera.main.transform,startPos,endPos, 0.1f));
-    }
+    //void CameraEffect(Vector3 startPos, Vector3 endPos)
+    //{
+    //    StartCoroutine(TranslateOverTime(Camera.main.transform,startPos,endPos, 0.1f));
+    //}
 
     void CharacterMove(Vector3 startPos, Vector3 endPos)
     {
