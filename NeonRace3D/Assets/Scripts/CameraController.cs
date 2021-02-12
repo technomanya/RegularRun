@@ -48,13 +48,18 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         if(effectOn)
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(15,-60,0), Time.deltaTime * speed);
+        {
+            Camera.main.transform.localPosition =
+                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0, 2, -15), Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(15, -60, 0),
+                Time.deltaTime * speed);
+        }
 
         if(effectGameOver)
         {
             Camera.main.transform.localPosition =
-                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,3 , -15), Time.deltaTime * speed);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, -120, 0),
+                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,2 , -15), Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, 180, 0),
                 Time.deltaTime * speed);
         }
     }
