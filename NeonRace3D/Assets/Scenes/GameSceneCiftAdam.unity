@@ -1555,7 +1555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87281429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 45}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2116121216}
@@ -9215,6 +9215,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4115462480505522124}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &751958523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6069487015908492322, guid: 4368be06572e93646801d1e2066f9e2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1885298920}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &751958526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751958523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 6, z: 3.413948}
+  m_Center: {x: -0.5, y: 3, z: 0.706974}
+--- !u!114 &751958527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751958523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49242bac06dc2b340b886c75461f9400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openDoorAnim: {fileID: 0}
 --- !u!1 &753992977
 GameObject:
   m_ObjectHideFlags: 0
@@ -11412,7 +11444,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 6
+  near clip plane: 3
   far clip plane: 100.01
   field of view: 26.991467
   orthographic: 0
@@ -11440,7 +11472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -15}
+  m_LocalPosition: {x: 0, y: 3, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2116121216}
@@ -26756,7 +26788,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116121215}
-  m_LocalRotation: {x: 0, y: 0.9659258, z: -0.2588191, w: 0}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -26764,7 +26796,7 @@ Transform:
   - {fileID: 705507995}
   m_Father: {fileID: 87281433}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &2116121217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26780,7 +26812,7 @@ MonoBehaviour:
   effectOn: 0
   effectGameOver: 0
   list: 
-  speed: 1
+  speed: 0.5
   Castle: {fileID: 822965324}
 --- !u!1001 &2126908452
 PrefabInstance:

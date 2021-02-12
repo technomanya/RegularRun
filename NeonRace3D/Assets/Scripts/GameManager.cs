@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
         var animS = _player.GetComponentInChildren<PlayerImageControllerCiftAdam>().animPlayer;
         if (playerName == "Player")
         {
-            Camera.main.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
+            //Camera.main.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
             youLose.gameObject.SetActive(false);
             youWin.gameObject.SetActive(true);
 
