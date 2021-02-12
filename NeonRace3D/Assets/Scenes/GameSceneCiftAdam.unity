@@ -182,7 +182,7 @@ MonoBehaviour:
   youWin: {fileID: 2078304502}
   youLose: {fileID: 2142994329}
   levelName: {fileID: 1444241033}
-  deleteSave: 0
+  deleteSave: 1
   SceneMaker: 1
   audioSource: {fileID: 0}
   _positivePoint: 0
@@ -3665,7 +3665,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-53148
+  m_Name: pb_Mesh-1310840
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3953,7 +3953,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-53104
+  m_Name: pb_Mesh-1310796
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23222,7 +23222,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-53144
+  m_Name: pb_Mesh-1310836
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
