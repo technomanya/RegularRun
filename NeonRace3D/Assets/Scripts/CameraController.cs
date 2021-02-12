@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]private bool effectOn = false;
     [SerializeField]private bool effectGameOver = false;
+    [SerializeField] private bool failGameOver = false;
 
     private Vector3 camLocalPos;
     private Quaternion camParentLocalRot;
@@ -60,12 +61,19 @@ public class CameraController : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(15, -60, 0),
                 Time.deltaTime * speed);
         }
-
         if(effectGameOver)
         {
             Camera.main.transform.localPosition =
                 Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,2 , -10), Time.deltaTime * speed);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, 0, 0),
+                Time.deltaTime * speed);
+        }
+
+        if (failGameOver)
+        {
+            Camera.main.transform.localPosition =
+                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0, 2, -10), Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, 180, 0),
                 Time.deltaTime * speed);
         }
     }
@@ -78,12 +86,19 @@ public class CameraController : MonoBehaviour
         // StartCoroutine(Reset());
     }
 
-    public void GameOverEffect()
+    public void GameOverEffect(bool win)
     {
-        if (effectOn)
-            effectOn = false;
+        if(win)
+        {
+            if (effectOn)
+                effectOn = false;
 
-        effectGameOver = true;
+            effectGameOver = true;
+        }
+        else
+        {
+            failGameOver = true;
+        }
     }
 
     //public IEnumerator Reset(Vector3 rPos, Quaternion rRot)

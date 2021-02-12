@@ -350,7 +350,7 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
                     anim.SetBool("GameOver", true);
                 }
 
-                MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
+                MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect(false);
                 GM.GameOver("LOSE");
             }
         }

@@ -100,6 +100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockWall_wDoor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 867887156755406268, guid: 5af7cb1a705a78244b43bbdb9fdc4ede,
+        type: 3}
+      propertyPath: m_TagString
+      value: ObstacleObj
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5af7cb1a705a78244b43bbdb9fdc4ede, type: 3}
 --- !u!4 &4042493389756637177 stripped
@@ -175,6 +180,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockWall_wDoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 867887156755406268, guid: 5af7cb1a705a78244b43bbdb9fdc4ede,
+        type: 3}
+      propertyPath: m_TagString
+      value: ObstacleObj
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5af7cb1a705a78244b43bbdb9fdc4ede, type: 3}
 --- !u!4 &7369293130193653953 stripped
@@ -249,6 +259,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RockWall_wDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 867887156755406268, guid: 5af7cb1a705a78244b43bbdb9fdc4ede,
+        type: 3}
+      propertyPath: m_TagString
+      value: ObstacleObj
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5af7cb1a705a78244b43bbdb9fdc4ede, type: 3}

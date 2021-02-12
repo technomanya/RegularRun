@@ -338,7 +338,7 @@ public class PlayerImageController : MonoBehaviour
                     anim.SetBool("GameOver", true);
                 }
 
-                MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
+                //MainCamera.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
                 GM.GameOver("LOSE");
             }
         }

@@ -10,7 +10,7 @@ public class OpenDoor : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Camera.main.gameObject.GetComponentInParent<CameraController>().GameOverEffect();
+            Camera.main.gameObject.GetComponentInParent<CameraController>().GameOverEffect(true);
             openDoorAnim = GetComponent<Animator>();
             openDoorAnim.SetTrigger("OpenDoor");
         }
