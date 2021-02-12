@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Full
-  m_Shader: {fileID: 4800000, guid: 70e19283e0f45cc41b48de36b262b1bf, type: 3}
-  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_RAMPTEXT
+  m_Shader: {fileID: 4800000, guid: a6da473b89caeb1409bac856668af764, type: 3}
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_SPEC
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -112,11 +112,11 @@ Material:
     - __dummy__: 0
     m_Colors:
     - <noninit>: {r: 0, g: 9.2285995e-35, b: 0, a: 9.228563e-35}
-    - _Color: {r: 0.82745105, g: 0.47058827, b: 0.30588236, a: 1}
+    - _Color: {r: 0.9725491, g: 0.7960785, b: 0.1254902, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HColor: {r: 0.4716981, g: 0.21051921, b: 0.1980242, a: 1}
     - _OutlineColor: {r: 0.42352945, g: 0.2627451, b: 0.227451, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_BuildTextureStacks: []
