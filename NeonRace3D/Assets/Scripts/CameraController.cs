@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField]private bool effectOn = false;
     [SerializeField]private bool effectGameOver = false;
+
+    private Vector3 camLocalPos;
+    private Quaternion camParentLocalRot;
 
     public List<int> list = new List<int>();
 
@@ -32,12 +36,14 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        camLocalPos = Camera.main.transform.localPosition;
+        camParentLocalRot = transform.localRotation;
         //Castle = GameObject.FindGameObjectWithTag("Finish").transform;
-        list[0] = list[list.Count - 1];
-        foreach (var item in list)
-        {
-            Debug.Log(item);
-        }
+        //list[0] = list[list.Count - 1];
+        //foreach (var item in list)
+        //{
+        //    //Debug.Log(item);
+        //}
     }
 
     void Update()
@@ -59,7 +65,7 @@ public class CameraController : MonoBehaviour
         {
             Camera.main.transform.localPosition =
                 Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,2 , -15), Time.deltaTime * speed);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, 180, 0),
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, 0, 0),
                 Time.deltaTime * speed);
         }
     }
@@ -80,11 +86,11 @@ public class CameraController : MonoBehaviour
         effectGameOver = true;
     }
 
-    IEnumerator Reset(Vector3 rPos, Quaternion rRot)
-    {
-        yield return new WaitForSeconds(2.0f);
-        effectOn = false;
-        Camera.main.transform.localPosition = rPos;
-        transform.localRotation = rRot;
-    }
+    //public IEnumerator Reset(Vector3 rPos, Quaternion rRot)
+    //{
+    //    yield return new WaitUntil(true);
+    //    effectOn = false;
+    //    Camera.main.transform.localPosition = rPos;
+    //    transform.localRotation = rRot;
+    //}
 }
