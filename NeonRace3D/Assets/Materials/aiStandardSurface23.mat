@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: aiStandardSurface23
   m_Shader: {fileID: 4800000, guid: a6da473b89caeb1409bac856668af764, type: 3}
-  m_ShaderKeywords: TCP2_SPEC
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_SPEC
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -75,19 +75,29 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RampSmooth: 0.1
-    - _RampThreshold: 0.5
-    - _Shininess: 0.09
+    - _RampSmooth: 0.01
+    - _RampSmoothAdd: 0.75
+    - _RampThreshold: 0.875
+    - _RimMax: 0.85
+    - _RimMin: 0.6
+    - _RimStrength: 0.5
+    - _Shininess: 0.133
     - _SmoothnessTextureChannel: 0
+    - _SpecBlend: 1
     - _SpecSmooth: 0.05
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TCP2_DISABLE_WRAPPED_LIGHT: 1
+    - _TCP2_RAMPTEXT: 0
+    - _TCP2_SPEC_TOON: 0
+    - _TCP2_STYLIZED_FRESNEL: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.7802371, b: 0.6745283, a: 1}
+    - _Color: {r: 0.7264151, g: 0.38719293, b: 0.45119712, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
-    - _SColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
-    - _SpecColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
+    - _HColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
+    - _SColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+    - _SpecColor: {r: 0.6320754, g: 0.27634275, b: 0, a: 1}
   m_BuildTextureStacks: []
