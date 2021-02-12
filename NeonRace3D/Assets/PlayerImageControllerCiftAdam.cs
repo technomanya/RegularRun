@@ -170,18 +170,20 @@ public class PlayerImageControllerCiftAdam : MonoBehaviour
     {
         if (col.transform.CompareTag("PowerObj"))
         {
+            ChangeStack(true);
             Debug.Log("POWEROBJ");
 
             audios[1].Play();
-            ChangeStack(true);
+
             col.gameObject.SetActive(false);
         }
         else if (col.transform.CompareTag("ObstacleObj"))
         {
+            ChangeStack(false);
             Debug.Log("OBSTACLEOBJ");
             obstacleFX.Play();
             audios[0].Play();
-            ChangeStack(false);
+            
         }
 
         else if (col.transform.CompareTag("FinalTrigger"))
