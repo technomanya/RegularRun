@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
         if(effectGameOver)
         {
             Camera.main.transform.localPosition =
-                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,2 , -10), Time.deltaTime * speed);
+                Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0,3 , -7.5f), Time.deltaTime * speed);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(30, 0, 0),
                 Time.deltaTime * speed);
         }
