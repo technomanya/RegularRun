@@ -1578,7 +1578,7 @@ MonoBehaviour:
   Grid: {fileID: 0}
   GM: {fileID: 0}
   player: {fileID: 87281429}
-  allSideRotAngle: 90
+  allSideRotAngle: 120
   tronRunning: {fileID: 0}
   speed: 5
   rotDuration: 0.5
@@ -1668,7 +1668,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  PlayerSpeed: 7.5
+  PlayerSpeed: 10
   frequency: 5
   mouseX: 0
   speedText: {fileID: 660969833}
@@ -23838,7 +23838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1958131115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26811,6 +26811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectOn: 0
   effectGameOver: 0
+  failGameOver: 0
   list: 
   speed: 0.5
   Castle: {fileID: 822965324}
