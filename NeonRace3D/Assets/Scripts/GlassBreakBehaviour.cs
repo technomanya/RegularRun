@@ -53,7 +53,7 @@ public class GlassBreakBehaviour : MonoBehaviour
             foreach (var part in glassParts)
             {
                 part.transform.parent = null;
-                part.GetComponent<Rigidbody>().isKinematic = false;
+                part.isKinematic = false;
             }
         }
     }
